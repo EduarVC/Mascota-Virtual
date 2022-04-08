@@ -125,10 +125,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblInformacionMascota.setForeground(new java.awt.Color(204, 204, 204));
         lblInformacionMascota.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInformacionMascota.setText("Hola soy un pokemon");
-        jpPanelLateral.add(lblInformacionMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 220, 120));
-        jpPanelLateral.add(lblFondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 500));
+        jpPanelLateral.add(lblInformacionMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 220, 120));
+        jpPanelLateral.add(lblFondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 510));
 
-        jpPanelPrincipal.add(jpPanelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 500));
+        jpPanelPrincipal.add(jpPanelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 510));
 
         btAcercaDe.setBackground(new java.awt.Color(23, 26, 32));
         btAcercaDe.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -162,7 +162,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Alimentar");
-        jpPanelPrincipal.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 100, 30));
+        jpPanelPrincipal.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, 30));
 
         jButton3.setBackground(new java.awt.Color(23, 26, 32));
         jButton3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -174,7 +174,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(204, 204, 204));
         jButton4.setText("Curar");
-        jpPanelPrincipal.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 100, 30));
+        jpPanelPrincipal.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 110, 30));
 
         cmbMascotasJugador.setBackground(new java.awt.Color(23, 26, 32));
         cmbMascotasJugador.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -192,8 +192,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         cbTienda.setBackground(new java.awt.Color(23, 26, 32));
         cbTienda.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         cbTienda.setForeground(new java.awt.Color(204, 204, 204));
-        cbTienda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpPanelPrincipal.add(cbTienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 100, 30));
+        cbTienda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tienda", "Restaurante", "Farmacia", "Pokemons" }));
+        jpPanelPrincipal.add(cbTienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 130, 30));
         jpPanelPrincipal.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, -2, 620, 510));
 
         getContentPane().add(jpPanelPrincipal, new java.awt.GridBagConstraints());
