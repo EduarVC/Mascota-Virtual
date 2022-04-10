@@ -1,8 +1,14 @@
 package com.mycompany.mascotas;
 
+import com.mycompany.JFrameMascotaVirtual.EstablecerImagenes;
+import com.mycompany.JFrameMascotaVirtual.JFramePrincipal;
+
 public class Mascota {
+    
+    private EstablecerImagenes establecer;
     private String nombreMascota;
     private String apodoMascota;
+    private String pathImagen;
     private int nivel;
     private boolean nace;
     private boolean crece_vivir;
@@ -14,6 +20,23 @@ public class Mascota {
     private boolean muere;
     private boolean revive;
 
+    public Mascota(){
+        establecer = new EstablecerImagenes();
+    }
+     @Override
+    public String toString() {
+        
+        return "Nombre: " + getNombreMascota() + "\nNivel: " + getNivel();
+    }
+
+    
+    public String getPathImagen() {
+        return pathImagen;
+    }
+
+    public void setPathImagen(String pathImagen) {
+        this.pathImagen = pathImagen;
+    }
     public String getApodoMascota() {
         return apodoMascota;
     }

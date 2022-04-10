@@ -13,5 +13,6 @@ public class Venusaur extends Mascota{
         setEnferma(false);
         setMuere(false);
         setRevive(false);
+        setPathImagen("src/main/java/com/mycompany/Imagenes/003Venusaur.png");
     }
 }

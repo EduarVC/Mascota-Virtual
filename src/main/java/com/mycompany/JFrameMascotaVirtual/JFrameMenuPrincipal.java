@@ -4,6 +4,8 @@
  */
 package com.mycompany.JFrameMascotaVirtual;
 
+import com.mycompany.Personajes.Jugador;
+
 public class JFrameMenuPrincipal extends javax.swing.JFrame {
 
     private int xMouse;
@@ -70,6 +72,11 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         btJugar.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         btJugar.setForeground(new java.awt.Color(204, 204, 204));
         btJugar.setText("JUGAR");
+        btJugar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btJugarMouseClicked(evt);
+            }
+        });
         jPanel1.add(btJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 110, 50));
 
         btSalir.setBackground(new java.awt.Color(23, 26, 32));
@@ -116,6 +123,14 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jPanel2MouseDragged
 
+    private void btJugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btJugarMouseClicked
+
+       JFramePrincipal principal = new JFramePrincipal();
+       principal.setVisible(true);
+       new JFrameMenuPrincipal().setVisible(false); 
+       
+    }//GEN-LAST:event_btJugarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -145,6 +160,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new JFrameMenuPrincipal().setVisible(true);
             }

@@ -13,5 +13,6 @@ public class Charmander extends Mascota{
         setEnferma(false);
         setMuere(false);
         setRevive(false);
+        setPathImagen("src/main/java/com/mycompany/Imagenes/004Charmander.png");
     }
 }
