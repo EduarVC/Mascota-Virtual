@@ -6,6 +6,7 @@ package com.mycompany.JFrameMascotaVirtual;
 
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.Tienda.Tienda;
+import com.mycompany.mascotas.Mascota;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 
@@ -14,26 +15,28 @@ import javax.swing.JComboBox;
  * @author Eduardo Vásquez
  */
 public class Pokemon extends javax.swing.JFrame {
+
     private EstablecerImagenes establecer;
     private Jugador jugador;
     private Tienda tiendaPokemons;
-   
+    private Mascota[] mascotasAdquiridas;
+
     /**
      * Creates new form Pokemon
      */
-    public Pokemon() {
+    public Pokemon(Mascota[] mascotasJugador) {
         initComponents();
+        this.mascotasAdquiridas = mascotasJugador;
         tiendaPokemons = new Tienda();
         jugador = new Jugador();
-         establecer = new EstablecerImagenes();
+        establecer = new EstablecerImagenes();
         this.setLocationRelativeTo(this);
-         lblOroTiendaPokemons.setText(Integer.toString(jugador.getMonedasOro()));
-         establecer.establecerImagen(lblTiendaOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
-         tiendaPokemons.obtenerTiendaPokemons(tbPokemons);
-         
+        lblOroTiendaPokemons.setText(Integer.toString(jugador.getMonedasOro()));
+        establecer.establecerImagen(lblTiendaOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
+        tiendaPokemons.obtenerTiendaPokemons(tbPokemons);
+
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -119,7 +122,7 @@ public class Pokemon extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
             int numeroMascota = Integer.parseInt(txtNumeroMascota.getText());
-            jugador.comprarMascota(numeroMascota);
+            jugador.comprarMascota(numeroMascota, mascotasAdquiridas);
         } catch (NumberFormatException e) {
             System.out.println("Dato Incorrecto");
         }
@@ -128,37 +131,37 @@ public class Pokemon extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pokemon().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Pokemon(mas).setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

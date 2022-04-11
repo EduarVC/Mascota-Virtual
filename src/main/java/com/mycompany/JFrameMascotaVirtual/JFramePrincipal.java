@@ -22,8 +22,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private int yMouse;
     EstablecerImagenes estblecer;
     private Jugador jugador = new Jugador();
-    private ControladorItems controlador;
-
+    private static ControladorItems controlador;
+    public static Mascota[] mascotasJugador;
 
     public JFramePrincipal() {
         initComponents();
@@ -31,6 +31,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         estblecer = new EstablecerImagenes();
         this.setLocationRelativeTo(this);
         jugador.obtenerMascotaPrincipal();
+        mascotasJugador = jugador.getMascotasAdquiridas();
         lblMonedasOro.setText(Integer.toString(jugador.getMonedasOro()));
         controlador.verificarNombreMascota(jugador.getMascotasAdquiridas()[0].getNombreMascota(), lblImagen, jugador.getMascotasAdquiridas(), lblInformacionMascota);
         estblecer.establecerImagen(lblFondo, "src/main/java/com/mycompany/Imagenes/Fondoo.jpg");
@@ -215,6 +216,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 cmbMascotasJugadorItemStateChanged(evt);
             }
         });
+        cmbMascotasJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMascotasJugadorActionPerformed(evt);
+            }
+        });
         jpPanelPrincipal.add(cmbMascotasJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 120, 30));
 
         lblTitulo.setBackground(new java.awt.Color(78, 76, 82));
@@ -279,11 +285,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbMascotasJugadorItemStateChanged
 
     private void btnAcptarTiendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcptarTiendaMouseClicked
+        for (int i = 0; i < mascotasJugador.length; i++) {
+            System.out.println(mascotasJugador[i]);
+        }
         ControladorSeleccionTienda controlTiendaS = new ControladorSeleccionTienda();
         String nombreTienda = (String) cbTienda.getSelectedItem();
-        controlTiendaS.tiendaSeleccionada(nombreTienda);
+        controlTiendaS.tiendaSeleccionada(nombreTienda, mascotasJugador);
 
     }//GEN-LAST:event_btnAcptarTiendaMouseClicked
+
+    private void cmbMascotasJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotasJugadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbMascotasJugadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,7 +339,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btAyuda;
     private javax.swing.JButton btnAcptarTienda;
     private javax.swing.JComboBox<String> cbTienda;
-    private javax.swing.JComboBox<String> cmbMascotasJugador;
+    public static javax.swing.JComboBox<String> cmbMascotasJugador;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

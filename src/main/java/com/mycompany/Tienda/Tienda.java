@@ -40,10 +40,4 @@ public class Tienda {
     public Mascota[] getMascotasTienda() {
         return mascotasTienda;
     }
-
-    public void ImprimirTiendaPokemons(Mascota[] mascotasTienda) {
-        for (int i = 0; i < mascotasTienda.length; i++) {
-            System.out.println(mascotasTienda[i]);
-        }
-    }
 }

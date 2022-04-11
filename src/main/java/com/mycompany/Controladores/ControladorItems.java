@@ -24,6 +24,7 @@ public class ControladorItems {
     public void verificarNombreMascota(String nombreMascota,JLabel lbl, Mascota [] mascotasJugador, JLabel lblTexto){
         for (Mascota mascota : mascotasJugador) {
             if (mascota.getNombreMascota().equals(nombreMascota)) {
+               establecer.establecerImagen(lbl, mascota.getPathImagen());
                 establecerDatos(mascota, lbl, lblTexto);
             }
         }
