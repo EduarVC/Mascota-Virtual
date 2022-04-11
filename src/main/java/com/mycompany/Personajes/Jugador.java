@@ -1,7 +1,10 @@
 package com.mycompany.Personajes;
 
+import com.mycompany.Controladores.ControladorOro;
+import static com.mycompany.Controladores.ControladorOro.setOro;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.cmbMascotasJugador;
-import com.mycompany.Tienda.Tienda;
+import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.setMascotasJugador;
+import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.setMonedaOro;
 import com.mycompany.mascotas.Mascota;
 import com.mycompany.mascotavirtual.MascotasExistentes;
 import javax.swing.DefaultComboBoxModel;
@@ -10,16 +13,15 @@ import javax.swing.JOptionPane;
 
 public class Jugador {
 
-    private int monedasOro;
+    public int monedasOro;
     private MascotasExistentes mascotaAdquirida;
     protected Mascota[] mascotasAdquiridas;
     private Mascota[] mascotas;
 
     public Jugador() {
-
+        monedasOro = 100;
         mascotaAdquirida = new MascotasExistentes();
         mascotasAdquiridas = new Mascota[1];
-        setMonedasOro(100);
     }
 
     //Se obtiene una mascota Inicial aleatoriamente 
@@ -60,20 +62,19 @@ public class Jugador {
         }
         DefaultComboBoxModel model = (DefaultComboBoxModel) cmbMascotasJugador.getModel();
         model.addElement(getMascotasAdquiridas()[getMascotasAdquiridas().length - 1].getNombreMascota());
-        setMonedasOro(monedasOro - 50);
-
+        monedasOro = restarMonedasOro(50);
+        setMascotasJugador(getMascotasAdquiridas());
+        setMonedaOro(monedasOro);
+        setOro(monedasOro);
+        ControladorOro.establecerOroLbl();
     }
 
     public void setMascotasAdquiridas(Mascota[] mascotasAdquiridas) {
         this.mascotasAdquiridas = mascotasAdquiridas;
     }
 
-    public int getMonedasOro() {
-        return monedasOro;
-    }
-
-    public void setMonedasOro(int monedasOro) {
-        this.monedasOro = monedasOro;
+    public int restarMonedasOro(int monedasRestadas){
+        return monedasOro -= monedasRestadas;
     }
 
 }

@@ -4,8 +4,8 @@
  */
 package com.mycompany.JFrameMascotaVirtual;
 
-import com.mycompany.Controladores.ControladorComboBox;
 import com.mycompany.Controladores.ControladorItems;
+import static com.mycompany.Controladores.ControladorOro.setOro;
 import com.mycompany.Controladores.ControladorSeleccionTienda;
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.mascotas.Mascota;
@@ -23,26 +23,50 @@ public class JFramePrincipal extends javax.swing.JFrame {
     EstablecerImagenes estblecer;
     private Jugador jugador = new Jugador();
     private static ControladorItems controlador;
-    public static Mascota[] mascotasJugador;
+    private static Mascota[] mascotasJugador;
+    private static int monedasOro;
 
     public JFramePrincipal() {
         initComponents();
-        controlador = new ControladorItems();
-        estblecer = new EstablecerImagenes();
-        this.setLocationRelativeTo(this);
-        jugador.obtenerMascotaPrincipal();
-        mascotasJugador = jugador.getMascotasAdquiridas();
-        lblMonedasOro.setText(Integer.toString(jugador.getMonedasOro()));
-        controlador.verificarNombreMascota(jugador.getMascotasAdquiridas()[0].getNombreMascota(), lblImagen, jugador.getMascotasAdquiridas(), lblInformacionMascota);
-        estblecer.establecerImagen(lblFondo, "src/main/java/com/mycompany/Imagenes/Fondoo.jpg");
-        estblecer.establecerImagen(lblFondo2, "src/main/java/com/mycompany/Imagenes/poke.png");
-        estblecer.establecerImagen(lblOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
-        InicializarCbo();
+        controlador = new ControladorItems();//Se inicializa objeto
+        estblecer = new EstablecerImagenes();//Se inicializa objeto
+        this.setLocationRelativeTo(this);//Establecemos la ventana al centro de la
+        jugador.obtenerMascotaPrincipal();//Se obtiene la mascota Principal
+        setMascotasJugador(jugador.getMascotasAdquiridas());//Se establece el arreglo de las mascotas del jugador 
+        setMonedaOro(jugador.monedasOro);//Se establecen las monedas de oro Iniciales 
+        lblMonedasOro.setText(Integer.toString(getMonedasOro()));//Se muestran las monedas de oro iniciales 
+        setOro(getMonedasOro());
+        controlador.verificarNombreMascota(getMascotasJugador()[0].getNombreMascota(), lblImagen, getMascotasJugador(), lblInformacionMascota);//llamamos al metodo para establecer la imagen y datos del pokemon
+        estblecer.establecerImagen(lblFondo, "src/main/java/com/mycompany/Imagenes/Fondoo.jpg");//Establemos la imagen de fondo
+        estblecer.establecerImagen(lblFondo2, "src/main/java/com/mycompany/Imagenes/poke.png");//Establecemos la imagen del panel lateral
+        estblecer.establecerImagen(lblOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");//establecemos la imagen del Oro
+        InicializarCbo();//llamamos al metodo para establecer datos del comboBox
     }
 
+    //metodo geter del arreglo de mascotas
+    public static Mascota[] getMascotasJugador() {
+        return mascotasJugador;
+    }
+
+    //Metodo seter del arreglo de mascotas
+    public static void setMascotasJugador(Mascota[] mascotasJugador) {
+        JFramePrincipal.mascotasJugador = mascotasJugador;
+    }
+
+    //metodo geter del oro
+    public static int getMonedasOro() {
+        return monedasOro;
+    }
+
+    //Metodo seter del oro
+    public static void setMonedaOro(int monedasOro) {
+        JFramePrincipal.monedasOro = monedasOro;
+    }
+
+    //Metodo para establecer datos principales del ComboBox 
     public void InicializarCbo() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cmbMascotasJugador.getModel();
-        for (Mascota mascota : jugador.getMascotasAdquiridas()) {
+        for (Mascota mascota : getMascotasJugador()) {
             model.addElement(mascota.getNombreMascota());
         }
     }
@@ -254,8 +278,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblBarraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBarraMousePressed
-        xMouse = evt.getX();
-        yMouse = evt.getY();
+        xMouse = evt.getX();//obtenemos la posicion del mouse en X
+        yMouse = evt.getY();//obtenemos la posicion del mouse en Y
     }//GEN-LAST:event_lblBarraMousePressed
 
     private void lblBarraMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBarraMouseDragged
@@ -281,16 +305,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void cmbMascotasJugadorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMascotasJugadorItemStateChanged
         // Se obtiene la mascota seleccionada del combobox
         String nombre = (String) cmbMascotasJugador.getSelectedItem();
-        controlador.verificarNombreMascota(nombre, lblImagen, jugador.getMascotasAdquiridas(), lblInformacionMascota);
+        controlador.verificarNombreMascota(nombre, lblImagen, getMascotasJugador(), lblInformacionMascota);//llamamos al metodo para establecer la imagen y datos del pokemon
     }//GEN-LAST:event_cmbMascotasJugadorItemStateChanged
 
     private void btnAcptarTiendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcptarTiendaMouseClicked
-        for (int i = 0; i < mascotasJugador.length; i++) {
-            System.out.println(mascotasJugador[i]);
+        for (int i = 0; i < getMascotasJugador().length; i++) {
+            System.out.println(getMascotasJugador()[i]);
         }
-        ControladorSeleccionTienda controlTiendaS = new ControladorSeleccionTienda();
-        String nombreTienda = (String) cbTienda.getSelectedItem();
-        controlTiendaS.tiendaSeleccionada(nombreTienda, mascotasJugador);
+        ControladorSeleccionTienda controlTiendaS = new ControladorSeleccionTienda();//creamos e Inicializamos el objeto
+        String nombreTienda = (String) cbTienda.getSelectedItem();//obtenemos el nombre de la tienda seleccionada del comboBox
+        controlTiendaS.tiendaSeleccionada(nombreTienda, getMascotasJugador());//llamamos al metodo que controla las tiendas
 
     }//GEN-LAST:event_btnAcptarTiendaMouseClicked
 
@@ -354,7 +378,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblFondo2;
     private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblInformacionMascota;
-    private javax.swing.JLabel lblMonedasOro;
+    public static javax.swing.JLabel lblMonedasOro;
     private javax.swing.JLabel lblOro;
     private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables

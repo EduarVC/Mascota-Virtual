@@ -4,8 +4,6 @@ package com.mycompany.Controladores;
 import com.mycompany.JFrameMascotaVirtual.EstablecerImagenes;
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.mascotas.Mascota;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
 public class ControladorItems {

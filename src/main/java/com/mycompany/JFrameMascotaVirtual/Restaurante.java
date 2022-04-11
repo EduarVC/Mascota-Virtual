@@ -20,7 +20,7 @@ public class Restaurante extends javax.swing.JFrame {
          jugador = new Jugador();
          establecer = new EstablecerImagenes();
         this.setLocationRelativeTo(this);
-         lblCantidadOro.setText(Integer.toString(jugador.getMonedasOro()));
+         lblCantidadOro.setText(Integer.toString(jugador.monedasOro));
          establecer.establecerImagen(lblImgOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
          
     }

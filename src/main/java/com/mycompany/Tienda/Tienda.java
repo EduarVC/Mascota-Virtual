@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class Tienda {
 
-    private Mascota[] mascotasTienda;
+    private static Mascota[] mascotasTienda;
     private MascotasExistentes mascota;
     private final int cantidaPokemons;
     private final int precioPokemons;
@@ -24,8 +24,8 @@ public class Tienda {
         String[] datos = new String[3];
         for (int i = 0; i < cantidaPokemons; i++) {
             mascotasTienda[i] = mascota.obtenerMascota(i + 1);
-
         }
+        setMascotasTienda(mascotasTienda);
         for (int i = 0; i < mascotasTienda.length; i++) {
             datos[0] = Integer.toString(i + 1);
             datos[1] = mascotasTienda[i].getNombreMascota();
@@ -35,6 +35,10 @@ public class Tienda {
             modelo.addRow(datos);
         }
 
+    }
+
+    public static void setMascotasTienda(Mascota[] mascotasTienda) {
+        Tienda.mascotasTienda = mascotasTienda;
     }
 
     public Mascota[] getMascotasTienda() {

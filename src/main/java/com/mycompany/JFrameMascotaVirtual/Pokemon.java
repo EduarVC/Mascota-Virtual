@@ -9,6 +9,7 @@ import com.mycompany.Tienda.Tienda;
 import com.mycompany.mascotas.Mascota;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Pokemon extends javax.swing.JFrame {
         jugador = new Jugador();
         establecer = new EstablecerImagenes();
         this.setLocationRelativeTo(this);
-        lblOroTiendaPokemons.setText(Integer.toString(jugador.getMonedasOro()));
+        lblOroTiendaPokemons.setText(Integer.toString(jugador.monedasOro));
         establecer.establecerImagen(lblTiendaOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
         tiendaPokemons.obtenerTiendaPokemons(tbPokemons);
 
@@ -120,11 +121,23 @@ public class Pokemon extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        try {
-            int numeroMascota = Integer.parseInt(txtNumeroMascota.getText());
-            jugador.comprarMascota(numeroMascota, mascotasAdquiridas);
-        } catch (NumberFormatException e) {
-            System.out.println("Dato Incorrecto");
+        if (jugador.monedasOro > 50) {
+            try {
+                int numeroMascota = Integer.parseInt(txtNumeroMascota.getText());
+                if (numeroMascota > 0 && numeroMascota < 152) {
+                    int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de comprar al pokémon No. %d llamado %s?", numeroMascota, tiendaPokemons.getMascotasTienda()[numeroMascota - 1].getNombreMascota()));
+                    if (salida == 0) {
+                        jugador.comprarMascota(numeroMascota, mascotasAdquiridas);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Dato Incorrecto");
+                }
+
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Dato Incorrecto");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No tienes Oro suficiiente para comprar Pokemons");
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -168,7 +181,7 @@ public class Pokemon extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumMascota;
-    private javax.swing.JLabel lblOroTiendaPokemons;
+    public static javax.swing.JLabel lblOroTiendaPokemons;
     private javax.swing.JLabel lblTiendaOro;
     private javax.swing.JLabel lblTituloTiendaPokemons;
     private javax.swing.JTable tbPokemons;
