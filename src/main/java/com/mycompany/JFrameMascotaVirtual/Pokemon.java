@@ -21,18 +21,17 @@ public class Pokemon extends javax.swing.JFrame {
     private Jugador jugador;
     private Tienda tiendaPokemons;
     private Mascota[] mascotasAdquiridas;
-
-    /**
-     * Creates new form Pokemon
-     */
-    public Pokemon(Mascota[] mascotasJugador) {
+    private int monedasOro;
+   
+    public Pokemon(Mascota[] mascotasJugador, int monedasOro) {
         initComponents();
+        this.monedasOro = monedasOro;
         this.mascotasAdquiridas = mascotasJugador;
         tiendaPokemons = new Tienda();
         jugador = new Jugador();
         establecer = new EstablecerImagenes();
         this.setLocationRelativeTo(this);
-        lblOroTiendaPokemons.setText(Integer.toString(jugador.monedasOro));
+        lblOroTiendaPokemons.setText(Integer.toString(this.monedasOro));
         establecer.establecerImagen(lblTiendaOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
         tiendaPokemons.obtenerTiendaPokemons(tbPokemons);
 
@@ -47,7 +46,7 @@ public class Pokemon extends javax.swing.JFrame {
         lblNumMascota = new javax.swing.JLabel();
         txtNumeroMascota = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
         lblTituloTiendaPokemons = new javax.swing.JLabel();
         lblTiendaOro = new javax.swing.JLabel();
         lblOroTiendaPokemons = new javax.swing.JLabel();
@@ -91,16 +90,22 @@ public class Pokemon extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 90, 20));
 
-        jButton2.setText("Regresar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegresar.setText("Regresar");
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnRegresarMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnRegresarMousePressed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 90, 20));
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 90, 20));
 
         lblTituloTiendaPokemons.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         lblTituloTiendaPokemons.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -116,18 +121,27 @@ public class Pokemon extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumeroMascotaActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        this.dispose();
-    }//GEN-LAST:event_jButton2MouseClicked
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (jugador.monedasOro > 50) {
+       
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btnRegresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMousePressed
+    this.dispose();
+    }//GEN-LAST:event_btnRegresarMousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+      if (this.monedasOro >= 50) {
             try {
                 int numeroMascota = Integer.parseInt(txtNumeroMascota.getText());
                 if (numeroMascota > 0 && numeroMascota < 152) {
                     int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de comprar al pokémon No. %d llamado %s?", numeroMascota, tiendaPokemons.getMascotasTienda()[numeroMascota - 1].getNombreMascota()));
                     if (salida == 0) {
-                        jugador.comprarMascota(numeroMascota, mascotasAdquiridas);
+                        jugador.comprarMascota(numeroMascota, mascotasAdquiridas, monedasOro);
+                        this.dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Dato Incorrecto");
@@ -139,46 +153,11 @@ public class Pokemon extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No tienes Oro suficiiente para comprar Pokemons");
         }
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Pokemon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Pokemon(mas).setVisible(true);
-//            }
-//        });
-//    }
+    }//GEN-LAST:event_jButton1MousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumMascota;
     public static javax.swing.JLabel lblOroTiendaPokemons;

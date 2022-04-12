@@ -1,5 +1,7 @@
 package com.mycompany.Personajes;
-
+import com.mycompany.Alimentos.Cereal;
+import com.mycompany.Alimentos.InterfasAlimento;
+import com.mycompany.Alimentos.Waffle;
 import com.mycompany.Controladores.ControladorOro;
 import static com.mycompany.Controladores.ControladorOro.setOro;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.cmbMascotasJugador;
@@ -17,9 +19,11 @@ public class Jugador {
     private MascotasExistentes mascotaAdquirida;
     protected Mascota[] mascotasAdquiridas;
     private Mascota[] mascotas;
+    private InterfasAlimento alimentos;
 
     public Jugador() {
-        monedasOro = 100;
+        alimentos = new Cereal();
+        alimentos = new Waffle();
         mascotaAdquirida = new MascotasExistentes();
         mascotasAdquiridas = new Mascota[1];
     }
@@ -40,8 +44,8 @@ public class Jugador {
         }
     }
 
-    public void comprarMascota(int numeroMascota, Mascota[] mascotasJugador) {
-
+    public void comprarMascota(int numeroMascota, Mascota[] mascotasJugador, int monedasOro) {
+        this.monedasOro = monedasOro;
         for (int i = 0; i < mascotasJugador.length; i++) {
             System.out.println(mascotasJugador[i]);
         }
@@ -66,14 +70,60 @@ public class Jugador {
         setMascotasJugador(getMascotasAdquiridas());
         setMonedaOro(monedasOro);
         setOro(monedasOro);
-        ControladorOro.establecerOroLbl();
+        ControladorOro.establecerOroLblTiendaPok();
+    }
+
+    public void comprarAlimento(int numeroAlimento, Mascota[] mascotasJugador, int monedasOro) {
+        this.monedasOro = monedasOro;
+        String nombreMascotaSeleccionada = (String) cmbMascotasJugador.getSelectedItem();
+        for (int i = 0; i < mascotasJugador.length; i++) {
+            if (mascotasJugador[i].getNombreMascota().equals(nombreMascotaSeleccionada)) {
+                switch (numeroAlimento) {
+                    case 1:
+                        mascotasJugador[i].setAlimentada(true);
+                        JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        break;
+                    case 2:
+                        mascotasJugador[i].setAlimentada(true);
+                        alimentos.AumentarComidasPendientes(mascotasJugador[i]);
+                        JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        break;
+                    case 3:
+                        mascotasJugador[i].setAlimentada(true);
+                        alimentos.AumentarComidasPendientes(mascotasJugador[i]);
+                        JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            }
+        }
+        switch (numeroAlimento) {
+            case 1:
+                monedasOro = restarMonedasOro(10);
+                break;
+            case 2:
+                monedasOro = restarMonedasOro(30);
+                break;
+            case 3:
+                monedasOro = restarMonedasOro(50);
+                break;
+            default:
+                break;
+        }
+        setMascotasAdquiridas(mascotasJugador);
+        setMascotasJugador(getMascotasAdquiridas());
+        setMonedaOro(monedasOro);
+        setOro(monedasOro);
+        ControladorOro.establecerOroLblTiendaAlim();
     }
 
     public void setMascotasAdquiridas(Mascota[] mascotasAdquiridas) {
         this.mascotasAdquiridas = mascotasAdquiridas;
     }
 
-    public int restarMonedasOro(int monedasRestadas){
+    public int restarMonedasOro(int monedasRestadas) {
         return monedasOro -= monedasRestadas;
     }
 

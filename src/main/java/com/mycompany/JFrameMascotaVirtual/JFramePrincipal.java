@@ -33,7 +33,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);//Establecemos la ventana al centro de la
         jugador.obtenerMascotaPrincipal();//Se obtiene la mascota Principal
         setMascotasJugador(jugador.getMascotasAdquiridas());//Se establece el arreglo de las mascotas del jugador 
-        setMonedaOro(jugador.monedasOro);//Se establecen las monedas de oro Iniciales 
+        setMonedaOro(100);//Se establecen las monedas de oro Iniciales 
         lblMonedasOro.setText(Integer.toString(getMonedasOro()));//Se muestran las monedas de oro iniciales 
         setOro(getMonedasOro());
         controlador.verificarNombreMascota(getMascotasJugador()[0].getNombreMascota(), lblImagen, getMascotasJugador(), lblInformacionMascota);//llamamos al metodo para establecer la imagen y datos del pokemon
@@ -268,6 +268,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAcptarTiendaMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAcptarTiendaMousePressed(evt);
+            }
         });
         jpPanelPrincipal.add(btnAcptarTienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 90, 30));
         jpPanelPrincipal.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, -2, 620, 510));
@@ -309,18 +312,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbMascotasJugadorItemStateChanged
 
     private void btnAcptarTiendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcptarTiendaMouseClicked
-        for (int i = 0; i < getMascotasJugador().length; i++) {
-            System.out.println(getMascotasJugador()[i]);
-        }
-        ControladorSeleccionTienda controlTiendaS = new ControladorSeleccionTienda();//creamos e Inicializamos el objeto
-        String nombreTienda = (String) cbTienda.getSelectedItem();//obtenemos el nombre de la tienda seleccionada del comboBox
-        controlTiendaS.tiendaSeleccionada(nombreTienda, getMascotasJugador());//llamamos al metodo que controla las tiendas
-
+       
     }//GEN-LAST:event_btnAcptarTiendaMouseClicked
 
     private void cmbMascotasJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotasJugadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbMascotasJugadorActionPerformed
+
+    private void btnAcptarTiendaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcptarTiendaMousePressed
+     for (int i = 0; i < getMascotasJugador().length; i++) {
+            System.out.println(getMascotasJugador()[i]);
+        }
+        ControladorSeleccionTienda controlTiendaS = new ControladorSeleccionTienda();//creamos e Inicializamos el objeto
+        String nombreTienda = (String) cbTienda.getSelectedItem();//obtenemos el nombre de la tienda seleccionada del comboBox
+        controlTiendaS.tiendaSeleccionada(nombreTienda, getMascotasJugador(), getMonedasOro());//llamamos al metodo que controla las tiendas
+
+    }//GEN-LAST:event_btnAcptarTiendaMousePressed
 
     /**
      * @param args the command line arguments

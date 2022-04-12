@@ -10,6 +10,8 @@ public class Mascota {
     private String apodoMascota;
     private String pathImagen;
     private int nivel;
+    private int conteoComidasAcumuladas;
+    private int comidasAcumuladas;
     private boolean nace;
     private boolean crece_vivir;
     private boolean alimentada;
@@ -27,6 +29,22 @@ public class Mascota {
     public String toString() {
         
         return "Nombre: " + getNombreMascota() + "\nNivel: " + getNivel();
+    }
+
+    public int getConteoComidasAcumuladas() {
+        return conteoComidasAcumuladas;
+    }
+
+    public void setConteoComidasAcumuladas(int conteoComidasAcumuladas) {
+        this.conteoComidasAcumuladas = conteoComidasAcumuladas;
+    }
+
+    public int getComidasAcumuladas() {
+        return comidasAcumuladas;
+    }
+
+    public void setComidasAcumuladas(int comidasAcumuladas) {
+        this.comidasAcumuladas = comidasAcumuladas;
     }
 
     

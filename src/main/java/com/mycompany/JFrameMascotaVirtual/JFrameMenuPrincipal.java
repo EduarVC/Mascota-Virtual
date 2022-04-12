@@ -65,6 +65,9 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btJugarMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btJugarMousePressed(evt);
+            }
         });
         jPanel1.add(btJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 110, 50));
 
@@ -75,6 +78,9 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
         btSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btSalirMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btSalirMousePressed(evt);
             }
         });
         jPanel1.add(btSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 110, 50));
@@ -97,7 +103,7 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalirMouseClicked
-        System.exit(0);
+        
     }//GEN-LAST:event_btSalirMouseClicked
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
@@ -113,10 +119,18 @@ public class JFrameMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void btJugarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btJugarMouseClicked
+       
+    }//GEN-LAST:event_btJugarMouseClicked
+
+    private void btJugarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btJugarMousePressed
         JFramePrincipal principal = new JFramePrincipal();
         principal.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btJugarMouseClicked
+    }//GEN-LAST:event_btJugarMousePressed
+
+    private void btSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalirMousePressed
+        System.exit(0);
+    }//GEN-LAST:event_btSalirMousePressed
 
     /**
      * @param args the command line arguments

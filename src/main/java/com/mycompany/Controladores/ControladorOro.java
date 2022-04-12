@@ -2,6 +2,7 @@ package com.mycompany.Controladores;
 
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.lblMonedasOro;
 import static com.mycompany.JFrameMascotaVirtual.Pokemon.lblOroTiendaPokemons;
+import static com.mycompany.JFrameMascotaVirtual.Restaurante.lblCantidadOro;
 
 public class ControladorOro {
     private static int Oro;
@@ -18,8 +19,12 @@ public class ControladorOro {
         ControladorOro.Oro = Oro;
     }
     
-    public static void establecerOroLbl(){
+    public static void establecerOroLblTiendaPok(){
         lblMonedasOro.setText(Integer.toString(getOro()));
-        lblOroTiendaPokemons.setText(Integer.toString(getOro()));
+        lblOroTiendaPokemons.setText(Integer.toString(getOro()));   
+    }
+    public static void establecerOroLblTiendaAlim(){
+        lblMonedasOro.setText(Integer.toString(getOro()));
+        lblCantidadOro.setText(Integer.toString(getOro()));
     }
 }

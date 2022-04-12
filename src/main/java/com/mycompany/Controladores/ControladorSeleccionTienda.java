@@ -8,20 +8,20 @@ import javax.swing.JComboBox;
 
 public class ControladorSeleccionTienda {
 
-    public void tiendaSeleccionada(String tiendaSeleccionada, Mascota[] mascotasJugador) {
+    public void tiendaSeleccionada(String tiendaSeleccionada, Mascota[] mascotasJugador, int monedasOro) {
         try {
             if (null != tiendaSeleccionada) {
                 switch (tiendaSeleccionada) {
                     case "Restaurante":
-                        Restaurante restaurante = new Restaurante();
+                        Restaurante restaurante = new Restaurante(mascotasJugador, monedasOro);
                         restaurante.setVisible(true);
                         break;
                     case "Farmacia":
-                        Farmacia farmacia = new Farmacia();
+                        Farmacia farmacia = new Farmacia(mascotasJugador, monedasOro);
                         farmacia.setVisible(true);
                         break;
                     case "Pokemons":
-                        Pokemon pokemons = new Pokemon(mascotasJugador);
+                        Pokemon pokemons = new Pokemon(mascotasJugador,monedasOro);
                         pokemons.setVisible(true);
                         break;
                     default:
