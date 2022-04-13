@@ -1,4 +1,5 @@
 package com.mycompany.Personajes;
+
 import com.mycompany.Alimentos.Cereal;
 import com.mycompany.Alimentos.InterfasAlimento;
 import com.mycompany.Alimentos.Waffle;
@@ -117,6 +118,69 @@ public class Jugador {
         setMonedaOro(monedasOro);
         setOro(monedasOro);
         ControladorOro.establecerOroLblTiendaAlim();
+    }
+
+    public void ComprarMedicina(int numeroMedicina, Mascota[] mascotasJugador, int monedasOro) {
+        this.monedasOro = monedasOro;
+        String nombreMascotaSeleccionada = (String) cmbMascotasJugador.getSelectedItem();
+        for (int i = 0; i < mascotasJugador.length; i++) {
+            if (mascotasJugador[i].getNombreMascota().equals(nombreMascotaSeleccionada)) {
+                if (mascotasJugador[i].isEnferma() == true) {
+                    switch (numeroMedicina) {
+                        case 1:
+                            mascotasJugador[i].setEnfermedadesAcumuladas(mascotasJugador[i].getEnfermedadesAcumuladas() - 1);
+                            JOptionPane.showMessageDialog(null, "Medicita aplicada exitosamente");
+                            break;
+                        case 2:
+                            if (mascotasJugador[i].getEnfermedadesAcumuladas() >= 2) {
+                                mascotasJugador[i].setEnfermedadesAcumuladas(mascotasJugador[i].getEnfermedadesAcumuladas() - 2);
+                                JOptionPane.showMessageDialog(null, "Medicita aplicada exitosamente");
+                            } else {
+                                mascotasJugador[i].setEnfermedadesAcumuladas(mascotasJugador[i].getEnfermedadesAcumuladas() - 1);
+                                JOptionPane.showMessageDialog(null, "Medicita aplicada exitosamente");
+                            }
+                            break;
+                        case 3:
+                            if (mascotasJugador[i].getEnfermedadesAcumuladas() >= 3) {
+                                mascotasJugador[i].setEnfermedadesAcumuladas(mascotasJugador[i].getEnfermedadesAcumuladas() - 3);
+                                JOptionPane.showMessageDialog(null, "Medicita aplicada exitosamente");
+                            } else if (mascotasJugador[i].getEnfermedadesAcumuladas() == 2) {
+                                mascotasJugador[i].setEnfermedadesAcumuladas(mascotasJugador[i].getEnfermedadesAcumuladas() - 2);
+                                JOptionPane.showMessageDialog(null, "Medicita aplicada exitosamente");
+                            } else {
+                                mascotasJugador[i].setEnfermedadesAcumuladas(mascotasJugador[i].getEnfermedadesAcumuladas() - 1);
+                                JOptionPane.showMessageDialog(null, "Medicita aplicada exitosamente");
+                            }
+                        default:
+                            throw new AssertionError();
+                    }
+                    if (mascotasJugador[i].getEnfermedadesAcumuladas() == 0) {
+                        mascotasJugador[i].setEnferma(false);
+                        JOptionPane.showMessageDialog(null, "Mascota Curada completamente");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "La mascota seleccionada no esta enferma");
+                }
+            }
+        }
+        switch (numeroMedicina) {
+            case 1:
+                monedasOro = restarMonedasOro(20);
+                break;
+            case 2:
+                monedasOro = restarMonedasOro(50);
+                break;
+            case 3:
+                monedasOro = restarMonedasOro(80);
+                break;
+            default:
+                break;
+        }
+        setMascotasAdquiridas(mascotasJugador);
+        setMascotasJugador(getMascotasAdquiridas());
+        setMonedaOro(monedasOro);
+        setOro(monedasOro);
+        ControladorOro.establecerOroLblTiendaMed();
     }
 
     public void setMascotasAdquiridas(Mascota[] mascotasAdquiridas) {

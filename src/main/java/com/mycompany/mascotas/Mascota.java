@@ -12,6 +12,8 @@ public class Mascota {
     private int nivel;
     private int conteoComidasAcumuladas;
     private int comidasAcumuladas;
+    private int conteoEnfermedadesAcumuladas;
+    private int EnfermedadesAcumuladas;
     private boolean nace;
     private boolean crece_vivir;
     private boolean alimentada;
@@ -28,7 +30,23 @@ public class Mascota {
      @Override
     public String toString() {
         
-        return "Nombre: " + getNombreMascota() + "\nNivel: " + getNivel();
+        return "Nombre: " + getNombreMascota() + "\nNivel: " + getNivel() + "enferma: "  + isEnferma() + "cantidad Enfermedades: " + getEnfermedadesAcumuladas();
+    }
+
+    public int getConteoEnfermedadesAcumuladas() {
+        return conteoEnfermedadesAcumuladas;
+    }
+
+    public void setConteoEnfermedadesAcumuladas(int conteoEnfermedadesAcumuladas) {
+        this.conteoEnfermedadesAcumuladas = conteoEnfermedadesAcumuladas;
+    }
+
+    public int getEnfermedadesAcumuladas() {
+        return EnfermedadesAcumuladas;
+    }
+
+    public void setEnfermedadesAcumuladas(int EnfermedadesAcumuladas) {
+        this.EnfermedadesAcumuladas = EnfermedadesAcumuladas;
     }
 
     public int getConteoComidasAcumuladas() {

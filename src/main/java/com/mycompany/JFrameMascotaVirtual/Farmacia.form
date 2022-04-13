@@ -29,7 +29,7 @@
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="lblImgOro" min="-2" pref="31" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblCantidadOro" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="lblCantidadOroo" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
                       <Component id="txtTituloFarmacia" min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
@@ -60,7 +60,7 @@
                       <Component id="txtTituloFarmacia" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnComprar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="lblCantidadOro" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
+                  <Component id="lblCantidadOroo" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -77,7 +77,10 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblImgOro">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCantidadOro">
+    <Component class="javax.swing.JLabel" name="lblCantidadOroo">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="txtTituloFarmacia">
       <Properties>

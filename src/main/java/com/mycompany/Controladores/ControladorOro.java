@@ -1,5 +1,6 @@
 package com.mycompany.Controladores;
 
+import static com.mycompany.JFrameMascotaVirtual.Farmacia.lblCantidadOroo;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.lblMonedasOro;
 import static com.mycompany.JFrameMascotaVirtual.Pokemon.lblOroTiendaPokemons;
 import static com.mycompany.JFrameMascotaVirtual.Restaurante.lblCantidadOro;
@@ -27,4 +28,9 @@ public class ControladorOro {
         lblMonedasOro.setText(Integer.toString(getOro()));
         lblCantidadOro.setText(Integer.toString(getOro()));
     }
+    public static void establecerOroLblTiendaMed(){
+        lblMonedasOro.setText(Integer.toString(getOro()));
+        lblCantidadOroo.setText(Integer.toString(getOro()));
+    }
+    
 }

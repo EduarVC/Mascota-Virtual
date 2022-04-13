@@ -23,7 +23,7 @@ public class Farmacia extends javax.swing.JFrame {
         jugador = new Jugador();
         establecer = new EstablecerImagenes();
         this.setLocationRelativeTo(this);
-        lblCantidadOro.setText(Integer.toString(this.monedasOro));
+        lblCantidadOroo.setText(Integer.toString(this.monedasOro));
         establecer.establecerImagen(lblImgOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");
         tiendaMedicina.obtenerMedicinaTienda(tbMedicina);
     }
@@ -33,7 +33,7 @@ public class Farmacia extends javax.swing.JFrame {
     private void initComponents() {
 
         lblImgOro = new javax.swing.JLabel();
-        lblCantidadOro = new javax.swing.JLabel();
+        lblCantidadOroo = new javax.swing.JLabel();
         txtTituloFarmacia = new javax.swing.JLabel();
         btnComprar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
@@ -93,7 +93,7 @@ public class Farmacia extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addComponent(lblImgOro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCantidadOro, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblCantidadOroo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(112, 112, 112)
                         .addComponent(txtTituloFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -117,7 +117,7 @@ public class Farmacia extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtTituloFarmacia, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnComprar))
-                    .addComponent(lblCantidadOro, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCantidadOroo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -149,20 +149,20 @@ public class Farmacia extends javax.swing.JFrame {
                     if (numeroSeleccionado == 3 && this.monedasOro >= 80) {
                         int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
                         if (salida == 0) {
-                            jugador.comprarAlimento(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
+                            jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
                             this.dispose();
                         }
                     } else if (numeroSeleccionado == 2 && this.monedasOro >= 50) {
                         int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
                         if (salida == 0) {
-                            jugador.comprarAlimento(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
+                            jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
                             this.dispose();
                         }
 
                     } else if (numeroSeleccionado == 1 && this.monedasOro >= 20) {
                         int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
                         if (salida == 0) {
-                            jugador.comprarAlimento(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
+                            jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
                             this.dispose();
                         }
                     } else {
@@ -190,7 +190,7 @@ public class Farmacia extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCantidadOro;
+    public static javax.swing.JLabel lblCantidadOroo;
     private javax.swing.JLabel lblImgOro;
     private javax.swing.JTable tbMedicina;
     private javax.swing.JTextField txtNumeroMedicamento;
