@@ -1,11 +1,9 @@
 package com.mycompany.mascotas;
 
-import com.mycompany.JFrameMascotaVirtual.EstablecerImagenes;
-import com.mycompany.JFrameMascotaVirtual.JFramePrincipal;
+import javax.swing.JOptionPane;
 
-public class Mascota {
+public class Mascota extends Thread{
     
-    private EstablecerImagenes establecer;
     private String nombreMascota;
     private String apodoMascota;
     private String pathImagen;
@@ -25,12 +23,24 @@ public class Mascota {
     private boolean revive;
 
     public Mascota(){
-        establecer = new EstablecerImagenes();
     }
      @Override
     public String toString() {
         
         return "Nombre: " + getNombreMascota() + "\nNivel: " + getNivel() + "enferma: "  + isEnferma() + "cantidad Enfermedades: " + getEnfermedadesAcumuladas();
+    }
+    @Override
+    public void run(){
+        int tiempo = 7000;
+        for (int i = 0; i < 10; i++) {
+             try {
+            Thread.sleep(tiempo);
+        } catch (InterruptedException e) {
+            JOptionPane.showMessageDialog(null, "Error en el Hilo");
+        }
+        JOptionPane.showMessageDialog(null, String.format("Hilo de %s en proceso", getNombreMascota()));
+        }
+       
     }
 
     public int getConteoEnfermedadesAcumuladas() {

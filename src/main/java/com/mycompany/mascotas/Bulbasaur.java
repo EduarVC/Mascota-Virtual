@@ -11,11 +11,10 @@ public class Bulbasaur extends Mascota{
         setLimpiada(false);
         setPaseada(false);
         setCurada(false);
-        setEnferma(true);
+        setEnferma(false);
         setMuere(false);
         setRevive(false);
         setPathImagen("src/main/java/com/mycompany/Imagenes/001Bulbasaur.png");
-        setEnfermedadesAcumuladas(3);
     }
     
 }

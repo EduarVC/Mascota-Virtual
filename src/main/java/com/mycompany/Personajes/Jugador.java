@@ -15,7 +15,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class Jugador {
-
     public int monedasOro;
     private MascotasExistentes mascotaAdquirida;
     protected Mascota[] mascotasAdquiridas;
@@ -40,6 +39,7 @@ public class Jugador {
         mascotasAdquiridas[0] = mascotaAdquirida.obtenerMascota(numero);
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotasAdquiridas[0].getNombreMascota());
         setMascotasAdquiridas(mascotasAdquiridas);
+        getMascotasAdquiridas()[0].start();
         for (int i = 0; i < mascotasAdquiridas.length; i++) {
             System.out.println(mascotasAdquiridas[i]);
         }
@@ -61,6 +61,7 @@ public class Jugador {
         setMascotasAdquiridas(mascotas);
 
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotas[mascotas.length - 1].getNombreMascota());
+        mascotas[mascotas.length-1].start();
         for (int i = 0; i < getMascotasAdquiridas().length; i++) {
             System.out.println(getMascotasAdquiridas()[i]);
 
