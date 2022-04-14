@@ -18,6 +18,7 @@ public class Bulbasaur extends Mascota{
         setComidasAcumuladas(5);
         setEnfermedadesAcumuladas(6);
         setNumeroMascota(1);
+        setApodoMascota("No disponible");
     }
     
 }

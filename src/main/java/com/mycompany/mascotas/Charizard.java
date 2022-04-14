@@ -17,5 +17,6 @@ public class Charizard extends Mascota{
         setComidasAcumuladas(5);
         setEnfermedadesAcumuladas(6);
         setNumeroMascota(6);
+        setApodoMascota("No disponible");
     }
 }

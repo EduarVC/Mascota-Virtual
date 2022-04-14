@@ -501,8 +501,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblExit;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblFondo2;
-    private javax.swing.JLabel lblImagen;
-    private javax.swing.JLabel lblInformacionMascota;
+    public static javax.swing.JLabel lblImagen;
+    public static javax.swing.JLabel lblInformacionMascota;
     public static javax.swing.JLabel lblMonedasOro;
     private javax.swing.JLabel lblOro;
     private javax.swing.JLabel lblTitulo;

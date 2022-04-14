@@ -17,5 +17,6 @@ public class Charmander extends Mascota{
         setComidasAcumuladas(5);
         setEnfermedadesAcumuladas(6);
         setNumeroMascota(4);
+        setApodoMascota("No disponible");
     }
 }

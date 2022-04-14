@@ -49,6 +49,7 @@ public class ControladorComboBox {
 
     //se cambia el arreglo de las mascotas del jugador y las muertas
     public void cambioMascotasJugador(Mascota mascotaMuerta, Mascota[] mascotasM) {
+        ControladorItems controlador = new ControladorItems();
         try {
             for (int i = 0; i < mascotasM.length; i++) {
                 System.out.println(mascotasM);
@@ -86,9 +87,8 @@ public class ControladorComboBox {
         jugador.setMascotasAdquiridas(cambioMascotas);
         setMascotasJugador(cambioMascotas);
         cmbMascotasJugador.removeAllItems();
-
         InicializarCbo(cmbMascotasJugador);
-
+        
         for (int i = 0; i < arregloMM.length; i++) {
             if (i != arregloMM.length - 1) {
                 arregloMM[i] = getmascotasMuertas()[i];
@@ -128,7 +128,7 @@ public class ControladorComboBox {
         setMascotasMuertas(arregloMascotas);
         if (getTamañoArregloMasMuertas() > 0) {
             cmbRevivir.removeAllItems();
-            
+
             InicializarCboRevivir(cmbRevivir);
         } else {
             cmbRevivir.removeAllItems();

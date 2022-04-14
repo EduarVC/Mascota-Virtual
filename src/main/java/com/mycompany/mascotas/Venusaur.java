@@ -17,5 +17,6 @@ public class Venusaur extends Mascota{
         setComidasAcumuladas(5);
         setEnfermedadesAcumuladas(6);
         setNumeroMascota(3);
+        setApodoMascota("No disponible");
     }
 }

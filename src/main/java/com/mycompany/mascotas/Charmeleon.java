@@ -17,5 +17,6 @@ public class Charmeleon extends Mascota{
         setComidasAcumuladas(5);
         setEnfermedadesAcumuladas(6);
         setNumeroMascota(5);
+        setApodoMascota("No disponible");
     }
 }

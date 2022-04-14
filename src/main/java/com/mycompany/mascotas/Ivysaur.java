@@ -17,5 +17,6 @@ public class Ivysaur extends Mascota{
         setComidasAcumuladas(5);
         setEnfermedadesAcumuladas(6);
         setNumeroMascota(2);
+        setApodoMascota("No disponible");
     }
 }
