@@ -4,13 +4,17 @@
  */
 package com.mycompany.JFrameMascotaVirtual;
 
+import static com.mycompany.Controladores.ControladorComboBox.setmascotasMuertas;
 import com.mycompany.Controladores.ControladorItems;
+import static com.mycompany.Controladores.ControladorOro.precioRevivir;
 import static com.mycompany.Controladores.ControladorOro.setOro;
 import com.mycompany.Controladores.ControladorSeleccionTienda;
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.mascotas.Mascota;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +29,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private static ControladorItems controlador;
     private static Mascota[] mascotasJugador;
     private static int monedasOro;
+    private static Mascota[] mascotasMuertas;
 
     public JFramePrincipal() {
         initComponents();
@@ -41,6 +46,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         estblecer.establecerImagen(lblFondo2, "src/main/java/com/mycompany/Imagenes/poke.png");//Establecemos la imagen del panel lateral
         estblecer.establecerImagen(lblOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");//establecemos la imagen del Oro
         InicializarCbo();//llamamos al metodo para establecer datos del comboBox
+    }
+
+    public static Mascota[] getMascotasMuertas() {
+        return mascotasMuertas;
+    }
+
+    public static void setMascotasMuertas(Mascota[] mascotasMuertas) {
+        JFramePrincipal.mascotasMuertas = mascotasMuertas;
     }
 
     //metodo geter del arreglo de mascotas
@@ -81,6 +94,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblExit = new javax.swing.JLabel();
         jpPanelLateral = new javax.swing.JPanel();
         lblImagen = new javax.swing.JLabel();
+        JpFondoInfo = new javax.swing.JPanel();
         lblInformacionMascota = new javax.swing.JLabel();
         lblFondo2 = new javax.swing.JLabel();
         btAcercaDe = new javax.swing.JButton();
@@ -89,13 +103,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jpFondoOro = new javax.swing.JPanel();
         lblMonedasOro = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         cmbMascotasJugador = new javax.swing.JComboBox<>();
+        jpFondoTitulo = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         cbTienda = new javax.swing.JComboBox<>();
         btnAcptarTienda = new javax.swing.JButton();
+        cmbRevivir = new javax.swing.JComboBox<>();
+        btnRevivir = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -163,10 +178,26 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblImagen.setForeground(new java.awt.Color(51, 0, 153));
         jpPanelLateral.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 90, 170, 130));
 
-        lblInformacionMascota.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        lblInformacionMascota.setForeground(new java.awt.Color(255, 102, 102));
+        JpFondoInfo.setBackground(new java.awt.Color(0, 0, 0));
+
+        lblInformacionMascota.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        lblInformacionMascota.setForeground(new java.awt.Color(204, 204, 204));
         lblInformacionMascota.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jpPanelLateral.add(lblInformacionMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 220, 120));
+
+        javax.swing.GroupLayout JpFondoInfoLayout = new javax.swing.GroupLayout(JpFondoInfo);
+        JpFondoInfo.setLayout(JpFondoInfoLayout);
+        JpFondoInfoLayout.setHorizontalGroup(
+            JpFondoInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpFondoInfoLayout.createSequentialGroup()
+                .addComponent(lblInformacionMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        JpFondoInfoLayout.setVerticalGroup(
+            JpFondoInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblInformacionMascota, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+        );
+
+        jpPanelLateral.add(JpFondoInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 220, 220));
         jpPanelLateral.add(lblFondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 510));
 
         jpPanelPrincipal.add(jpPanelLateral, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 510));
@@ -212,25 +243,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Pasear");
-        jpPanelPrincipal.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 100, 30));
+        jpPanelPrincipal.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 100, 30));
 
-        jButton2.setBackground(new java.awt.Color(23, 26, 32));
-        jButton2.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(204, 204, 204));
-        jButton2.setText("Alimentar");
-        jpPanelPrincipal.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 110, 30));
-
-        jButton3.setBackground(new java.awt.Color(23, 26, 32));
-        jButton3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(204, 204, 204));
-        jButton3.setText("Limpiar");
-        jpPanelPrincipal.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, 100, 30));
-
-        jButton4.setBackground(new java.awt.Color(23, 26, 32));
-        jButton4.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(204, 204, 204));
-        jButton4.setText("Curar");
-        jpPanelPrincipal.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 110, 30));
+        btnLimpiar.setBackground(new java.awt.Color(23, 26, 32));
+        btnLimpiar.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(204, 204, 204));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnLimpiarMousePressed(evt);
+            }
+        });
+        jpPanelPrincipal.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 100, 30));
 
         cmbMascotasJugador.setBackground(new java.awt.Color(23, 26, 32));
         cmbMascotasJugador.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -240,19 +264,38 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 cmbMascotasJugadorItemStateChanged(evt);
             }
         });
+        cmbMascotasJugador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cmbMascotasJugadorMousePressed(evt);
+            }
+        });
         cmbMascotasJugador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbMascotasJugadorActionPerformed(evt);
             }
         });
-        jpPanelPrincipal.add(cmbMascotasJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 150, 120, 30));
+        jpPanelPrincipal.add(cmbMascotasJugador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 120, 30));
+
+        jpFondoTitulo.setBackground(new java.awt.Color(0, 0, 0));
 
         lblTitulo.setBackground(new java.awt.Color(78, 76, 82));
         lblTitulo.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(0, 51, 255));
+        lblTitulo.setForeground(new java.awt.Color(204, 204, 204));
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("MASCOTA VIRTUAL");
-        jpPanelPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 260, 27));
+
+        javax.swing.GroupLayout jpFondoTituloLayout = new javax.swing.GroupLayout(jpFondoTitulo);
+        jpFondoTitulo.setLayout(jpFondoTituloLayout);
+        jpFondoTituloLayout.setHorizontalGroup(
+            jpFondoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+        );
+        jpFondoTituloLayout.setVerticalGroup(
+            jpFondoTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jpPanelPrincipal.add(jpFondoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 290, 30));
 
         cbTienda.setBackground(new java.awt.Color(23, 26, 32));
         cbTienda.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -273,7 +316,23 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jpPanelPrincipal.add(btnAcptarTienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 90, 30));
-        jpPanelPrincipal.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, -2, 620, 510));
+
+        cmbRevivir.setBackground(new java.awt.Color(23, 26, 32));
+        cmbRevivir.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        cmbRevivir.setForeground(new java.awt.Color(204, 204, 204));
+        jpPanelPrincipal.add(cmbRevivir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 120, 30));
+
+        btnRevivir.setBackground(new java.awt.Color(23, 26, 32));
+        btnRevivir.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnRevivir.setForeground(new java.awt.Color(204, 204, 204));
+        btnRevivir.setText("Revivir");
+        btnRevivir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnRevivirMousePressed(evt);
+            }
+        });
+        jpPanelPrincipal.add(btnRevivir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 90, 30));
+        jpPanelPrincipal.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 620, 510));
 
         getContentPane().add(jpPanelPrincipal, new java.awt.GridBagConstraints());
 
@@ -312,7 +371,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbMascotasJugadorItemStateChanged
 
     private void btnAcptarTiendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcptarTiendaMouseClicked
-       
+
     }//GEN-LAST:event_btnAcptarTiendaMouseClicked
 
     private void cmbMascotasJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMascotasJugadorActionPerformed
@@ -320,7 +379,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbMascotasJugadorActionPerformed
 
     private void btnAcptarTiendaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcptarTiendaMousePressed
-     for (int i = 0; i < getMascotasJugador().length; i++) {
+        for (int i = 0; i < getMascotasJugador().length; i++) {
             System.out.println(getMascotasJugador()[i]);
         }
         ControladorSeleccionTienda controlTiendaS = new ControladorSeleccionTienda();//creamos e Inicializamos el objeto
@@ -328,6 +387,63 @@ public class JFramePrincipal extends javax.swing.JFrame {
         controlTiendaS.tiendaSeleccionada(nombreTienda, getMascotasJugador(), getMonedasOro());//llamamos al metodo que controla las tiendas
 
     }//GEN-LAST:event_btnAcptarTiendaMousePressed
+
+    private void cmbMascotasJugadorMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbMascotasJugadorMousePressed
+        String nombre = (String) cmbMascotasJugador.getSelectedItem();
+        controlador.verificarNombreMascota(nombre, lblImagen, getMascotasJugador(), lblInformacionMascota);//llamamos al metodo para establecer la imagen y datos del pokemon
+    }//GEN-LAST:event_cmbMascotasJugadorMousePressed
+
+    private void btnLimpiarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMousePressed
+        if (cmbMascotasJugador.getSelectedItem() != null) {
+            int salida = JOptionPane.showConfirmDialog(null, String.format("Esta seguro de limpiar a %s", cmbMascotasJugador.getSelectedItem()));
+            if (salida == 0) {
+                try {
+                    for (int i = 0; i < getMascotasJugador().length; i++) {
+                        if (getMascotasJugador()[i].getNombreMascota() == cmbMascotasJugador.getSelectedItem()) {
+                            if (getMascotasJugador()[i].getConteoLimpiezaAcumulada() > 0) {
+                                getMascotasJugador()[i].setConteoLimpiezaAcumulada(getMascotasJugador()[i].getConteoLimpiezaAcumulada() - 1);
+                                JOptionPane.showMessageDialog(null, "Limpieza exitosa");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "La mascota no necesita limpieza en este momento.");
+                            }
+                            break;
+                        }
+                    }
+                } catch (HeadlessException e) {
+                    System.out.println("Seleccione una mascota");
+                }
+
+            }
+        }
+    }//GEN-LAST:event_btnLimpiarMousePressed
+
+    private void btnRevivirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevivirMousePressed
+        for (int i = 0; i < getMascotasMuertas().length; i++) {
+            System.out.println(getMascotasMuertas());
+        }
+        setmascotasMuertas(getMascotasMuertas());
+        try {
+
+            for (int i = 0; i < getMascotasMuertas().length; i++) {
+                if (getMascotasMuertas()[i].getNombreMascota() == cmbRevivir.getSelectedItem()) {
+                    int precio = precioRevivir(getMascotasMuertas()[i]);
+                    if (getMonedasOro() > precio) {
+                        int salida = JOptionPane.showConfirmDialog(null, String.format("¿Esta seguro de revivir al pokemon %s por %d monedas de oro?", getMascotasMuertas()[i].getNombreMascota(), precio));
+                        if (salida == 0) {
+                            jugador.revivirMascota(getMascotasMuertas()[i], getMascotasJugador(), monedasOro, getMascotasMuertas());
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null, "No tienes Oro suficiente para revivir a los pokemons");
+                    }
+                    break;
+                }
+            }
+
+        } catch (NullPointerException e) {
+
+        }
+
+    }//GEN-LAST:event_btnRevivirMousePressed
 
     /**
      * @param args the command line arguments
@@ -366,17 +482,19 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel JpFondoInfo;
     private javax.swing.JButton btAcercaDe;
     private javax.swing.JButton btAyuda;
     private javax.swing.JButton btnAcptarTienda;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRevivir;
     private javax.swing.JComboBox<String> cbTienda;
     public static javax.swing.JComboBox<String> cmbMascotasJugador;
+    public static javax.swing.JComboBox<String> cmbRevivir;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JPanel jpExit;
     private javax.swing.JPanel jpFondoOro;
+    private javax.swing.JPanel jpFondoTitulo;
     private javax.swing.JPanel jpPanelLateral;
     private javax.swing.JPanel jpPanelPrincipal;
     private javax.swing.JLabel lblBarra;

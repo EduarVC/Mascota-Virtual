@@ -178,7 +178,9 @@ public class Farmacia extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No tienes monedas de oro suficientes para comprar medicamentos");
             }
-        } else {
+        } else if ("".equals(txtNumeroMedicamento.getText())) {
+            JOptionPane.showMessageDialog(null, "Dato Incorrecto");
+        } else if (aplica == false) {
             JOptionPane.showMessageDialog(null, "La mascota seleccionada no esta enferma");
         }
         //vamos aca ponete vivo

@@ -12,6 +12,5 @@ public class Cereal extends Alimento implements InterfasAlimento{
     @Override
     public void AumentarComidasPendientes(Mascota mascotaAlimentada) {
        mascotaAlimentada.setComidasAcumuladas(7);
-       mascotaAlimentada.setAlimentada(true);
     }
 }

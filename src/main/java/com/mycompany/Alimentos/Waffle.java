@@ -12,7 +12,6 @@ public class Waffle extends Alimento implements InterfasAlimento{
     @Override
     public void AumentarComidasPendientes(Mascota mascotaAlimentada) {
         mascotaAlimentada.setComidasAcumuladas(10);
-        mascotaAlimentada.setAlimentada(true);
     }
     
 }

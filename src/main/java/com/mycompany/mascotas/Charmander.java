@@ -14,5 +14,8 @@ public class Charmander extends Mascota{
         setMuere(false);
         setRevive(false);
         setPathImagen("src/main/java/com/mycompany/Imagenes/004Charmander.png");
+        setComidasAcumuladas(5);
+        setEnfermedadesAcumuladas(6);
+        setNumeroMascota(4);
     }
 }

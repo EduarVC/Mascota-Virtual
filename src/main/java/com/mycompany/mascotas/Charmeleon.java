@@ -14,5 +14,8 @@ public class Charmeleon extends Mascota{
         setMuere(false);
         setRevive(false);
         setPathImagen("src/main/java/com/mycompany/Imagenes/005Charmeleon.png");
+        setComidasAcumuladas(5);
+        setEnfermedadesAcumuladas(6);
+        setNumeroMascota(5);
     }
 }

@@ -14,5 +14,8 @@ public class Charizard extends Mascota{
         setMuere(false);
         setRevive(false);
         setPathImagen("src/main/java/com/mycompany/Imagenes/006Charizard.png");
+        setComidasAcumuladas(5);
+        setEnfermedadesAcumuladas(6);
+        setNumeroMascota(6);
     }
 }

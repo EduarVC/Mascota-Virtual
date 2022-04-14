@@ -29,6 +29,14 @@ public class ControladorItems {
     }
     public void establecerDatos(Mascota mascotaSeleccionada, JLabel lbl, JLabel texto){
         establecer.establecerImagen(lbl, mascotaSeleccionada.getPathImagen());
-        texto.setText( "<html>Pokemon: "+ mascotaSeleccionada.getNombreMascota() + "<p>Nivel: "+ mascotaSeleccionada.getNivel()+"<html>");
+        texto.setText( "<html>Pokemon: "+ mascotaSeleccionada.getNombreMascota() 
+                + "<p>Nivel: "+ mascotaSeleccionada.getNivel()
+                + "<p>Apodo: "+ mascotaSeleccionada.getApodoMascota()
+                + "<p>Alimento pendiente: "+ mascotaSeleccionada.getConteoComidasAcumuladas() + "/" + mascotaSeleccionada.getComidasAcumuladas()
+                + "<p>Paseo pendiente: "+ mascotaSeleccionada.getConteoPaseoAcumulado() + "/4"
+                + "<p>Limpieza pendiente: "+ mascotaSeleccionada.getConteoLimpiezaAcumulada() + "/3"
+                + "<p>Enfermedades: "+ mascotaSeleccionada.getConteoEnfermedadesAcumuladas() + "/6"
+                
+                +"<html>");
     }
 }

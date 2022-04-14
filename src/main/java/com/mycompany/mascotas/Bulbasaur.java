@@ -15,6 +15,9 @@ public class Bulbasaur extends Mascota{
         setMuere(false);
         setRevive(false);
         setPathImagen("src/main/java/com/mycompany/Imagenes/001Bulbasaur.png");
+        setComidasAcumuladas(5);
+        setEnfermedadesAcumuladas(6);
+        setNumeroMascota(1);
     }
     
 }
