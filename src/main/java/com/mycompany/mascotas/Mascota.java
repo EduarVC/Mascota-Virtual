@@ -57,18 +57,6 @@ public class Mascota extends Thread {
                 }
                 JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita ser alimentado", getNombreMascota()));
                 setConteoComidasAcumuladas(getConteoComidasAcumuladas() + 1);
-                setConteoAlimentos(getConteoAlimentos() + 1);
-                if (getConteoAlimentos() == 2) {
-                    JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita ser limpiada", getNombreMascota()));
-                    setConteoLimpiezaAcumulada(getConteoLimpiezaAcumulada() + 1);
-                    if (getConteoLimpiezaAcumulada() >= 3) {
-                        setConteoEnfermedadesAcumuladas(getConteoEnfermedadesAcumuladas() + 1);
-                        setEnferma(true);
-                        JOptionPane.showMessageDialog(null, String.format("el pokemon %s a contraido una nueva enfermedad", getNombreMascota()));
-                        setConteoLimpiezaAcumulada(0);
-                    }                    
-                    setConteoAlimentos(0);
-                }
                 
                 try {
                     Thread.sleep(tiempoPaseo);

@@ -7,8 +7,6 @@ package com.mycompany.JFrameMascotaVirtual;
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.Tienda.Tienda;
 import com.mycompany.mascotas.Mascota;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +43,7 @@ public class Pokemon extends javax.swing.JFrame {
         tbPokemons = new javax.swing.JTable();
         lblNumMascota = new javax.swing.JLabel();
         txtNumeroMascota = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnComprar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblTituloTiendaPokemons = new javax.swing.JLabel();
         lblTiendaOro = new javax.swing.JLabel();
@@ -85,16 +83,16 @@ public class Pokemon extends javax.swing.JFrame {
         });
         getContentPane().add(txtNumeroMascota, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 50, -1));
 
-        jButton1.setText("Comprar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnComprar.setText("Comprar");
+        btnComprar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnComprarMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
+                btnComprarMousePressed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 90, 20));
+        getContentPane().add(btnComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 90, 20));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,16 +123,16 @@ public class Pokemon extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRegresarMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprarMouseClicked
        
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_btnComprarMouseClicked
 
     private void btnRegresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMousePressed
     this.dispose();
     }//GEN-LAST:event_btnRegresarMousePressed
 
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-      if (this.monedasOro >= 50) {
+    private void btnComprarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprarMousePressed
+      if (this.monedasOro >= 50 && mascotasAdquiridas.length < 10) {
             try {
                 int numeroMascota = Integer.parseInt(txtNumeroMascota.getText());
                 if (numeroMascota > 0 && numeroMascota < 152) {
@@ -150,14 +148,16 @@ public class Pokemon extends javax.swing.JFrame {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Dato Incorrecto");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No tienes Oro suficiiente para comprar Pokemons");
+        } else if(this.monedasOro < 50){
+            JOptionPane.showMessageDialog(null, "No tiene Oro suficiiente para comprar Pokemons");
+        }else {
+            JOptionPane.showMessageDialog(null, "No puede tener mas de 10 pokemons");
         }
-    }//GEN-LAST:event_jButton1MousePressed
+    }//GEN-LAST:event_btnComprarMousePressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNumMascota;
     public static javax.swing.JLabel lblOroTiendaPokemons;

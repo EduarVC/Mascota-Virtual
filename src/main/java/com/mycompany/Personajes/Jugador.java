@@ -17,6 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class Jugador {
+
     public int monedasOro;
     private MascotasExistentes mascotaAdquirida;
     protected Mascota[] mascotasAdquiridas;
@@ -65,10 +66,10 @@ public class Jugador {
 
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotas[mascotas.length - 1].getNombreMascota());
         String apodo = JOptionPane.showInputDialog("Ingrese un apodo para su nuevo pokemon");
-        if(apodo != ""){
-        mascotas[mascotas.length-1].setApodoMascota(apodo);
+        if (apodo != "") {
+            mascotas[mascotas.length - 1].setApodoMascota(apodo);
         }
-        mascotas[mascotas.length-1].start();
+        mascotas[mascotas.length - 1].start();
         for (int i = 0; i < getMascotasAdquiridas().length; i++) {
             System.out.println(getMascotasAdquiridas()[i]);
 
@@ -89,28 +90,52 @@ public class Jugador {
             if (mascotasJugador[i].getNombreMascota().equals(nombreMascotaSeleccionada)) {
                 switch (numeroAlimento) {
                     case 1:
-                        mascotasJugador[i].setAlimentada(true);
-                        mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas()-1);
+                        if (mascotasJugador[i].getConteoComidasAcumuladas() > 0) {
+                            mascotasJugador[i].setAlimentada(true);
+                            mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
+                        }
+
                         JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
+                        mascotasJugador[i].setComidasAcumuladas(5);
                         break;
                     case 2:
-                        mascotasJugador[i].setAlimentada(true);
-                        mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas()-1);
+                        if (mascotasJugador[i].getConteoComidasAcumuladas() > 0) {
+                            mascotasJugador[i].setAlimentada(true);
+                            mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
+                        }
+
                         alimento.AumentarComidasPendientes(mascotasJugador[i]);
                         JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
                         break;
                     case 3:
-                        mascotasJugador[i].setAlimentada(true);//condicionar esta linea 
-                        mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas()-1);
+                        if (mascotasJugador[i].getConteoComidasAcumuladas() > 0) {
+                            mascotasJugador[i].setAlimentada(true);
+                            mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
+                        }
                         alimentos.AumentarComidasPendientes(mascotasJugador[i]);
                         JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
                         break;
                     default:
                         break;
                 }
+                if (mascotasJugador[i].getConteoAlimentos() == 2) {
+                    JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita ser limpiada", mascotasJugador[i].getNombreMascota()));
+                    mascotasJugador[i].setConteoLimpiezaAcumulada(mascotasJugador[i].getConteoLimpiezaAcumulada() + 1);
+                    if (mascotasJugador[i].getConteoLimpiezaAcumulada() >= 3) {
+                        mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() + 1);
+                        mascotasJugador[i].setEnferma(true);
+                        JOptionPane.showMessageDialog(null, String.format("el pokemon %s a contraido una nueva enfermedad", mascotasJugador[i].getNombreMascota()));
+                        mascotasJugador[i].setConteoLimpiezaAcumulada(0);
+                    }                    
+                    mascotasJugador[i].setConteoAlimentos(0);
+                }
                 break;
             }
         }
+        
         switch (numeroAlimento) {
             case 1:
                 monedasOro = restarMonedasOro(10);
@@ -193,7 +218,8 @@ public class Jugador {
         setOro(monedasOro);
         ControladorOro.establecerOroLblTiendaMed();
     }
-    public void revivirMascota(Mascota mascotaRevivida, Mascota[] mascotasJugador, int monedasOro, Mascota [] mascotasMuertas) {
+
+    public void revivirMascota(Mascota mascotaRevivida, Mascota[] mascotasJugador, int monedasOro, Mascota[] mascotasMuertas) {
         ControladorComboBox controlador = new ControladorComboBox();
         this.monedasOro = monedasOro;
         int precioRevivir;
@@ -209,11 +235,11 @@ public class Jugador {
                 mascotas[i] = mascotasJugador[i];
             }
         }
-        
+
         setMascotasAdquiridas(mascotas);
 
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotas[mascotas.length - 1].getNombreMascota());
-        mascotas[mascotas.length-1].start();
+        mascotas[mascotas.length - 1].start();
         for (int i = 0; i < getMascotasAdquiridas().length; i++) {
             System.out.println(getMascotasAdquiridas()[i]);
 
