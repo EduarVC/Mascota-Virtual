@@ -7,6 +7,7 @@ package com.mycompany.JFrameMascotaVirtual;
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.Tienda.Tienda;
 import com.mycompany.mascotas.Mascota;
+import com.mycompany.mascotavirtual.MascotasExistentes;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +21,7 @@ public class Pokemon extends javax.swing.JFrame {
     private Tienda tiendaPokemons;
     private Mascota[] mascotasAdquiridas;
     private int monedasOro;
-   
+
     public Pokemon(Mascota[] mascotasJugador, int monedasOro) {
         initComponents();
         this.monedasOro = monedasOro;
@@ -124,22 +125,39 @@ public class Pokemon extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarMouseClicked
 
     private void btnComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprarMouseClicked
-       
+
     }//GEN-LAST:event_btnComprarMouseClicked
 
     private void btnRegresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMousePressed
-    this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnRegresarMousePressed
 
     private void btnComprarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprarMousePressed
-      if (this.monedasOro >= 50 && mascotasAdquiridas.length < 10) {
+        boolean yaAdquirida = false;
+        Mascota verificar = new Mascota();
+        MascotasExistentes mascotaAdquirida = new MascotasExistentes();
+
+        if (this.monedasOro >= 50 && mascotasAdquiridas.length < 10) {
             try {
                 int numeroMascota = Integer.parseInt(txtNumeroMascota.getText());
+                verificar = mascotaAdquirida.obtenerMascota(numeroMascota);
                 if (numeroMascota > 0 && numeroMascota < 152) {
-                    int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de comprar al pokémon No. %d llamado %s?", numeroMascota, tiendaPokemons.getMascotasTienda()[numeroMascota - 1].getNombreMascota()));
-                    if (salida == 0) {
-                        jugador.comprarMascota(numeroMascota, mascotasAdquiridas, monedasOro);
-                        this.dispose();
+                    for (int i = 0; i < mascotasAdquiridas.length; i++) {
+                        if (mascotasAdquiridas[i].getNombreMascota().equals(verificar.getNombreMascota())) {
+                            yaAdquirida = true;
+                            break;
+                        } else {
+                            yaAdquirida = false;
+                        }
+                    }
+                    if (yaAdquirida == false) {
+                        int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de comprar al pokémon No. %d llamado %s?", numeroMascota, tiendaPokemons.getMascotasTienda()[numeroMascota - 1].getNombreMascota()));
+                        if (salida == 0) {
+                            jugador.comprarMascota(numeroMascota, mascotasAdquiridas, monedasOro);
+                            this.dispose();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ya tienes a este pokemon, seleccione a otro");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Dato Incorrecto");
@@ -148,9 +166,9 @@ public class Pokemon extends javax.swing.JFrame {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Dato Incorrecto");
             }
-        } else if(this.monedasOro < 50){
+        } else if (this.monedasOro < 50) {
             JOptionPane.showMessageDialog(null, "No tiene Oro suficiiente para comprar Pokemons");
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "No puede tener mas de 10 pokemons");
         }
     }//GEN-LAST:event_btnComprarMousePressed

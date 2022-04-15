@@ -136,52 +136,59 @@ public class Farmacia extends javax.swing.JFrame {
 
     private void btnComprarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnComprarMousePressed
         String nombreMascotaSeleccionada = (String) cmbMascotasJugador.getSelectedItem();
-        boolean aplica = false;
-        for (int i = 0; i < mascotasJugador.length; i++) {
-            if (mascotasJugador[i].getNombreMascota().equals(nombreMascotaSeleccionada)) {
-                aplica = mascotasJugador[i].isEnferma();
-            }
-        }
-        if (aplica == true) {
-            if (this.monedasOro >= 20) {
-                try {
-                    int numeroSeleccionado = Integer.parseInt(txtNumeroMedicamento.getText());
-                    if (numeroSeleccionado == 3 && this.monedasOro >= 80) {
-                        int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
-                        if (salida == 0) {
-                            jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
-                            this.dispose();
-                        }
-                    } else if (numeroSeleccionado == 2 && this.monedasOro >= 50) {
-                        int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
-                        if (salida == 0) {
-                            jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
-                            this.dispose();
-                        }
 
-                    } else if (numeroSeleccionado == 1 && this.monedasOro >= 20) {
-                        int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
-                        if (salida == 0) {
-                            jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
-                            this.dispose();
-                        }
-                    } else {
-                        if (numeroSeleccionado == 3 || numeroSeleccionado == 2) {
-                            JOptionPane.showMessageDialog(null, "No tienes monedas de oro suficientes para comprar esta medicina");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Dato Incorrecto");
+        if (this.monedasOro >= 20) {
+            try {
+                int numeroSeleccionado = Integer.parseInt(txtNumeroMedicamento.getText());
+                boolean aplica = false;
+                if (numeroSeleccionado > 0 && numeroSeleccionado <= 3) {
+                    for (int i = 0; i < mascotasJugador.length; i++) {
+                        if (mascotasJugador[i].getNombreMascota().equals(nombreMascotaSeleccionada)) {
+                            aplica = mascotasJugador[i].isEnferma();
+                            break;
                         }
                     }
-                } catch (NumberFormatException e) {
+                    if (aplica == true) {
+                        if (numeroSeleccionado == 3 && this.monedasOro >= 80) {
+                            int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
+                            if (salida == 0) {
+                                jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
+                                this.dispose();
+                            }
+                        } else if (numeroSeleccionado == 2 && this.monedasOro >= 50) {
+                            int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
+                            if (salida == 0) {
+                                jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
+                                this.dispose();
+                            }
+
+                        } else if (numeroSeleccionado == 1 && this.monedasOro >= 20) {
+                            int salida = JOptionPane.showConfirmDialog(null, String.format("¿Está seguro de darle %s al pokemon seleccionado?", tiendaMedicina.getMedicinaTienda()[numeroSeleccionado - 1].getNombreMedicina()));
+                            if (salida == 0) {
+                                jugador.ComprarMedicina(numeroSeleccionado, mascotasJugador, monedasOro);//modificar
+                                this.dispose();
+                            }
+                        } else {
+                            if (numeroSeleccionado == 3 || numeroSeleccionado == 2) {
+                                JOptionPane.showMessageDialog(null, "No tienes monedas de oro suficientes para comprar esta medicina");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Dato Incorrecto");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La mascota seleccionada no esta enferma en este momento");
+                    }
+                } else {
                     JOptionPane.showMessageDialog(null, "Dato Incorrecto");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "No tienes monedas de oro suficientes para comprar medicamentos");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Dato Incorrecto");
             }
-        } else if ("".equals(txtNumeroMedicamento.getText())) {
+        } else {
+            JOptionPane.showMessageDialog(null, "No tienes monedas de oro suficientes para comprar medicamentos");
+        }
+        if ("".equals(txtNumeroMedicamento.getText())) {
             JOptionPane.showMessageDialog(null, "Dato Incorrecto");
-        } else if (aplica == false) {
-            JOptionPane.showMessageDialog(null, "La mascota seleccionada no esta enferma");
         }
         //vamos aca ponete vivo
     }//GEN-LAST:event_btnComprarMousePressed

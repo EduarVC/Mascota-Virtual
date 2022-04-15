@@ -51,12 +51,10 @@ public class Jugador {
 
     public void comprarMascota(int numeroMascota, Mascota[] mascotasJugador, int monedasOro) {
         this.monedasOro = monedasOro;
-        for (int i = 0; i < mascotasJugador.length; i++) {
-            System.out.println(mascotasJugador[i]);
-        }
         mascotas = new Mascota[mascotasJugador.length + 1];
         for (int i = 0; i < mascotas.length; i++) {
             if (i == mascotas.length - 1) {
+
                 mascotas[i] = mascotaAdquirida.obtenerMascota(numeroMascota);
             } else {
                 mascotas[i] = mascotasJugador[i];
@@ -66,7 +64,7 @@ public class Jugador {
 
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotas[mascotas.length - 1].getNombreMascota());
         String apodo = JOptionPane.showInputDialog("Ingrese un apodo para su nuevo pokemon");
-        if (apodo != "") {
+        if (!"".equals(apodo)) {
             mascotas[mascotas.length - 1].setApodoMascota(apodo);
         }
         mascotas[mascotas.length - 1].start();
@@ -81,6 +79,7 @@ public class Jugador {
         setMonedaOro(monedasOro);
         setOro(monedasOro);
         ControladorOro.establecerOroLblTiendaPok();
+
     }
 
     public void comprarAlimento(int numeroAlimento, Mascota[] mascotasJugador, int monedasOro) {
@@ -95,7 +94,7 @@ public class Jugador {
                             mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
                         }
 
-                        JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        JOptionPane.showMessageDialog(null, "Pokemon Alimentado Exitosamente");
                         mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
                         mascotasJugador[i].setComidasAcumuladas(5);
                         break;
@@ -106,7 +105,7 @@ public class Jugador {
                         }
 
                         alimento.AumentarComidasPendientes(mascotasJugador[i]);
-                        JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        JOptionPane.showMessageDialog(null, "Pokemon Alimentado Exitosamente");
                         mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
                         break;
                     case 3:
@@ -115,27 +114,27 @@ public class Jugador {
                             mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
                         }
                         alimentos.AumentarComidasPendientes(mascotasJugador[i]);
-                        JOptionPane.showMessageDialog(null, "Mascota Alimentada Exitosamente");
+                        JOptionPane.showMessageDialog(null, "Pokemon Alimentado Exitosamente");
                         mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
                         break;
                     default:
                         break;
                 }
                 if (mascotasJugador[i].getConteoAlimentos() == 2) {
-                    JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita ser limpiada", mascotasJugador[i].getNombreMascota()));
+                    JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita limpieza", mascotasJugador[i].getNombreMascota()));
                     mascotasJugador[i].setConteoLimpiezaAcumulada(mascotasJugador[i].getConteoLimpiezaAcumulada() + 1);
                     if (mascotasJugador[i].getConteoLimpiezaAcumulada() >= 3) {
                         mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() + 1);
                         mascotasJugador[i].setEnferma(true);
                         JOptionPane.showMessageDialog(null, String.format("el pokemon %s a contraido una nueva enfermedad", mascotasJugador[i].getNombreMascota()));
                         mascotasJugador[i].setConteoLimpiezaAcumulada(0);
-                    }                    
+                    }
                     mascotasJugador[i].setConteoAlimentos(0);
                 }
                 break;
             }
         }
-        
+
         switch (numeroAlimento) {
             case 1:
                 monedasOro = restarMonedasOro(10);
@@ -187,15 +186,16 @@ public class Jugador {
                                 mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 1);
                                 JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
                             }
+                            break;
                         default:
                             throw new AssertionError();
                     }
                     if (mascotasJugador[i].getConteoEnfermedadesAcumuladas() == 0) {
                         mascotasJugador[i].setEnferma(false);
-                        JOptionPane.showMessageDialog(null, "Mascota Curada completamente");
+                        JOptionPane.showMessageDialog(null, "MPokemon Curado completamente");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "La mascota seleccionada no esta enferma");
+                    JOptionPane.showMessageDialog(null, "El pokemon seleccionado no esta enferma");
                 }
             }
         }
