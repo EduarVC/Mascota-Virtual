@@ -39,7 +39,7 @@ public class Jugador {
 
     public void obtenerMascotaPrincipal() {
         int numero;
-        numero = (int) (Math.random() * 6 + 1);
+        numero = (int) (Math.random() * 20 + 1);
         mascotasAdquiridas[0] = mascotaAdquirida.obtenerMascota(numero);
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotasAdquiridas[0].getNombreMascota());
         setMascotasAdquiridas(mascotasAdquiridas);

@@ -1,13 +1,20 @@
 package com.mycompany.JuegoMemoria;
 
+import static com.mycompany.JuegoMemoria.AccionBotones.setArregloBotones;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class JFrameMemoria extends javax.swing.JFrame {
     JButton [][] matriz;
-    public JFrameMemoria() {
+    private int columnas;
+    private int filas;
+    public JFrameMemoria(int columnas, int filas) {
         initComponents();
+        this.columnas = columnas;
+        this.filas = filas;
         this.setLocationRelativeTo(this);
         setMatriz();
     }
@@ -43,56 +50,32 @@ public class JFrameMemoria extends javax.swing.JFrame {
 
     public void setMatriz(){
         Font fuent = new Font("Arial",Font.BOLD,16);
-        matriz = new JButton[5][8];
+        matriz = new JButton[filas][columnas];
         int x = 20;
         int y = 20;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
                 matriz [i][j] = new JButton();
                 matriz [i][j].setBackground(Color.DARK_GRAY);
                 matriz [i][j].setBounds(y, x, 80, 80);
                 matriz [i][j].setText("?");
                 matriz [i][j].setFont(fuent);
+                AccionBotones accion = new AccionBotones(filas, columnas);
+                try {
+                    matriz[i][j].addActionListener(accion);
+                } catch (ClassCastException e) {
+                    JOptionPane.showMessageDialog(null, "Algo salio mal");
+                }
+                
                 jPMemoria.add(matriz[i][j]);
                 y +=80;
             }
             x+=80;
             y=20;
         }
+        setArregloBotones(matriz);
     }
 
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameMemoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameMemoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameMemoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameMemoria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameMemoria().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPMemoria;

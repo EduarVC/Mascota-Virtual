@@ -1,5 +1,6 @@
 package com.mycompany.JuegoMemoria;
 
+import static com.mycompany.JuegoMemoria.AccionBotones.setMatrizz;
 import com.mycompany.mascotas.Mascota;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -24,7 +25,7 @@ public class EstablecerMatriz {
         this.matriz = matriz;
     }
 
-    public void obtenerCantidadCartas(/*Mascota mascotaSalvaje*/ int nivel) {
+    public static void obtenerCantidadCartas(int nivel) {
         switch (nivel) {
             case 0:
                 setFilas(4);
@@ -63,18 +64,18 @@ public class EstablecerMatriz {
         }
     }
 
-    public void matriz(/*Mascota mascotaEnemigo*/) {
+    public static void matriz(Mascota mascotaEnemigo) {
         int contador = 0;
         int contador2 = 0;
         boolean existe = false;
-        obtenerCantidadCartas(7);
+        obtenerCantidadCartas(mascotaEnemigo.getNivel());
         int numeroParejas = (getColumnas() * getFilas()) / 2;
         int[] cartas = new int[getColumnas() * getFilas()];
         int[] parejas = new int[numeroParejas];
         int[][] matrizN = new int[getFilas()][getColumnas()];
 
         while (contador < numeroParejas) {
-            int numero = (int) (Math.random() * 151 + 1);
+            int numero = (int) (Math.random() * 20 + 1); // cambair dato
             for (int i = 0; i < parejas.length; i++) {
                 if (numero == parejas[i]) {
                     existe = true;
@@ -135,7 +136,11 @@ public class EstablecerMatriz {
             }
             System.out.println("");
         }
+        setMatrizz(matrizN);
+        JFrameMemoria inciar = new JFrameMemoria(getColumnas(), getFilas());
+        inciar.setVisible(true);
     }
+    
 
     public static int getColumnas() {
         return columnas;

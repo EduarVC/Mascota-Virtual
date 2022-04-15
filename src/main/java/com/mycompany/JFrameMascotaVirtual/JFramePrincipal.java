@@ -9,6 +9,7 @@ import com.mycompany.Controladores.ControladorItems;
 import static com.mycompany.Controladores.ControladorOro.precioRevivir;
 import static com.mycompany.Controladores.ControladorOro.setOro;
 import com.mycompany.Controladores.ControladorSeleccionTienda;
+import com.mycompany.Personajes.Enemigo;
 import com.mycompany.Personajes.Jugador;
 import com.mycompany.mascotas.Mascota;
 import java.awt.Color;
@@ -102,7 +103,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         lblOro = new javax.swing.JLabel();
         jpFondoOro = new javax.swing.JPanel();
         lblMonedasOro = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPaseo = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         cmbMascotasJugador = new javax.swing.JComboBox<>();
         jpFondoTitulo = new javax.swing.JPanel();
@@ -239,11 +240,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jpPanelPrincipal.add(jpFondoOro, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 40, 20));
 
-        jButton1.setBackground(new java.awt.Color(23, 26, 32));
-        jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 204, 204));
-        jButton1.setText("Pasear");
-        jpPanelPrincipal.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 100, 30));
+        btnPaseo.setBackground(new java.awt.Color(23, 26, 32));
+        btnPaseo.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnPaseo.setForeground(new java.awt.Color(204, 204, 204));
+        btnPaseo.setText("Pasear");
+        btnPaseo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnPaseoMousePressed(evt);
+            }
+        });
+        jpPanelPrincipal.add(btnPaseo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 100, 30));
 
         btnLimpiar.setBackground(new java.awt.Color(23, 26, 32));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -445,6 +451,21 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRevivirMousePressed
 
+    private void btnPaseoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPaseoMousePressed
+      String nombre = (String) cmbMascotasJugador.getSelectedItem();
+      Mascota mascotaPaseo = new Mascota();
+      Enemigo enemigo = new Enemigo();
+        for (int i = 0; i < getMascotasJugador().length; i++) {
+            if(getMascotasJugador()[i].getNombreMascota().equals(nombre)){
+                mascotaPaseo = getMascotasJugador()[i];
+                break;
+            }
+        }
+        enemigo.obtenerMascota(mascotaPaseo);
+        
+        
+    }//GEN-LAST:event_btnPaseoMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -487,11 +508,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btAyuda;
     private javax.swing.JButton btnAcptarTienda;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnPaseo;
     private javax.swing.JButton btnRevivir;
     private javax.swing.JComboBox<String> cbTienda;
     public static javax.swing.JComboBox<String> cmbMascotasJugador;
     public static javax.swing.JComboBox<String> cmbRevivir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jpExit;
     private javax.swing.JPanel jpFondoOro;
     private javax.swing.JPanel jpFondoTitulo;
