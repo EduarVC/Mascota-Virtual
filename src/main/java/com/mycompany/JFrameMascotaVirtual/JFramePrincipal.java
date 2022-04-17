@@ -39,7 +39,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);//Establecemos la ventana al centro de la
         jugador.obtenerMascotaPrincipal();//Se obtiene la mascota Principal
         setMascotasJugador(jugador.getMascotasAdquiridas());//Se establece el arreglo de las mascotas del jugador 
-        setMonedaOro(1000);//Se establecen las monedas de oro Iniciales 
+        setMonedaOro(100);//Se establecen las monedas de oro Iniciales 
         lblMonedasOro.setText(Integer.toString(getMonedasOro()));//Se muestran las monedas de oro iniciales 
         setOro(getMonedasOro());
         controlador.verificarNombreMascota(getMascotasJugador()[0].getNombreMascota(), lblImagen, getMascotasJugador(), lblInformacionMascota);//llamamos al metodo para establecer la imagen y datos del pokemon
@@ -454,16 +454,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void btnPaseoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPaseoMousePressed
       String nombre = (String) cmbMascotasJugador.getSelectedItem();
       Mascota mascotaPaseo = new Mascota();
-      Enemigo enemigo = new Enemigo();
         for (int i = 0; i < getMascotasJugador().length; i++) {
             if(getMascotasJugador()[i].getNombreMascota().equals(nombre)){
                 mascotaPaseo = getMascotasJugador()[i];
                 break;
             }
         }
-        enemigo.obtenerMascota(mascotaPaseo);
         
-        
+        Paseo paseo = new Paseo(mascotaPaseo);
+        paseo.setVisible(true);
     }//GEN-LAST:event_btnPaseoMousePressed
 
     /**

@@ -1,5 +1,7 @@
 package com.mycompany.JuegoMemoria;
 
+import com.mycompany.Controladores.ControladorPaseo;
+import static com.mycompany.Controladores.ControladorPaseo.setSalir;
 import static com.mycompany.JuegoMemoria.AccionBotones.getArregloBotones;
 import static com.mycompany.JuegoMemoria.AccionBotones.setArregloBotones;
 import com.mycompany.mascotas.Mascota;
@@ -21,19 +23,32 @@ public class JFrameMemoria extends javax.swing.JFrame {
     private static int parejasJugador;
     private static int parejasEnemigo;
     private static int contadorClik;
+    private static Mascota mascota;
     
     public JFrameMemoria(int columnas, int filas) {
         initComponents();
         this.columnas = columnas;
         this.filas = filas;
         this.setLocationRelativeTo(this);
+        mascota = new Mascota();
         setParejasEnemigo(0);
         setParejasJugador(0);
         setContadorClik(0);
+        lblParesEn.setText("Pares Pokemon Salvaje: "+ getParejasEnemigo());
+        lblParesPk.setText("Pares Pokemon Salvaje: "+ getParejasJugador());
+        lblTurno.setText("Turno: Mi pokemon");
         botonAnterior = null;
         mascotaAnterior = null;
         setTurnoJugador(true);
         setMatriz();
+    }
+
+    public static Mascota getMascota() {
+        return mascota;
+    }
+
+    public static void setMascota(Mascota mascota) {
+        JFrameMemoria.mascota = mascota;
     }
 
     public static int getContadorClik() {
@@ -87,15 +102,18 @@ public class JFrameMemoria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPMemoria = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         LblTitulo = new javax.swing.JLabel();
+        jPMemoria = new javax.swing.JPanel();
+        lblParesPk = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JButton();
+        lblParesEn = new javax.swing.JLabel();
+        lblTurno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPMemoria.setBackground(new java.awt.Color(51, 51, 51));
-        jPMemoria.setForeground(new java.awt.Color(102, 102, 102));
-        jPMemoria.setLayout(null);
+        jPanel2.setBackground(new java.awt.Color(0, 51, 51));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -108,35 +126,115 @@ public class JFrameMemoria extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+            .addGap(0, 366, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(LblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+            .addGap(0, 47, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(LblTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+        );
+
+        jPMemoria.setBackground(new java.awt.Color(51, 51, 51));
+        jPMemoria.setForeground(new java.awt.Color(102, 102, 102));
+        jPMemoria.setLayout(null);
+
+        lblParesPk.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        lblParesPk.setForeground(new java.awt.Color(204, 204, 204));
+        lblParesPk.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        btnRegresar.setBackground(new java.awt.Color(23, 26, 32));
+        btnRegresar.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(204, 204, 204));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnRegresarMousePressed(evt);
+            }
+        });
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+
+        lblParesEn.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        lblParesEn.setForeground(new java.awt.Color(204, 204, 204));
+        lblParesEn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblTurno.setBackground(new java.awt.Color(204, 204, 204));
+        lblTurno.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        lblTurno.setForeground(new java.awt.Color(204, 204, 204));
+        lblTurno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPMemoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(lblParesPk, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(lblParesEn, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
+                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(280, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(281, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(lblTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblParesPk, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblParesEn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(530, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPMemoria, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(170, 170, 170))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jPMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnRegresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMousePressed
+        ControladorPaseo controlador = new ControladorPaseo(getMascota());
+        setSalir(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMousePressed
 
     public void setMatriz(){
         Font fuent = new Font("Arial",Font.BOLD,16);
@@ -170,7 +268,12 @@ public class JFrameMemoria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblTitulo;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JPanel jPMemoria;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    public static javax.swing.JLabel lblParesEn;
+    public static javax.swing.JLabel lblParesPk;
+    public static javax.swing.JLabel lblTurno;
     // End of variables declaration//GEN-END:variables
 }

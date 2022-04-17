@@ -20,7 +20,9 @@ public class ControladorOro {
     public static void setOro(int Oro) {
         ControladorOro.Oro = Oro;
     }
-    
+    public static void establecerOroPrincipal(){
+        lblMonedasOro.setText(Integer.toString(getOro()));
+    }
     public static void establecerOroLblTiendaPok(){
         lblMonedasOro.setText(Integer.toString(getOro()));
         lblOroTiendaPokemons.setText(Integer.toString(getOro()));   

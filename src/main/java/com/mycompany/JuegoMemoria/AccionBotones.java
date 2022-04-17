@@ -1,11 +1,27 @@
 package com.mycompany.JuegoMemoria;
 
+import static com.mycompany.Controladores.ControladorOro.establecerOroPrincipal;
+import static com.mycompany.Controladores.ControladorOro.getOro;
+import static com.mycompany.Controladores.ControladorOro.setOro;
+import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.cmbMascotasJugador;
+import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMascotasJugador;
+import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMonedasOro;
+import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.setMonedaOro;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.getBotonAnterior;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.getContadorClik;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.getMascotaAnterior;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.getParejasEnemigo;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.getParejasJugador;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.isTurnoJugador;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.lblParesEn;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.lblParesPk;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.lblTurno;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.matriz;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.setBotonAnterior;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.setContadorClik;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.setMascotaAnterior;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.setParejasEnemigo;
+import static com.mycompany.JuegoMemoria.JFrameMemoria.setParejasJugador;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.setTurnoJugador;
 import com.mycompany.mascotas.Mascota;
 import com.mycompany.mascotavirtual.MascotasExistentes;
@@ -81,7 +97,7 @@ public class AccionBotones implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < getArregloBotones().length; i++) {
             for (int j = 0; j < getArregloBotones()[i].length; j++) {
-                if (e.getSource().equals(getArregloBotones()[i][j])) {
+                if (e.getSource().equals(getArregloBotones()[i][j]) && arregloBotones[i][j] != getBotonAnterior()) {
                     setNumero(getMatrizz()[i][j]);
                     mascota = obtenerImgMas.obtenerMascota(getNumero());
                     ImageIcon im = new ImageIcon(mascota.getPathImagen());
@@ -92,8 +108,8 @@ public class AccionBotones implements ActionListener {
                             if (isTurnoJugador() == true) {
                                 setVictoriasJugador(getVictoriasJugador() + 1);
                                 JOptionPane.showMessageDialog(null, "Turno Jugador. Pareja encontrda, continue con el turno");
-                                
                                 arregloBotones[i][j].setEnabled(false);
+                                setContadorClik(getContadorClik() + 1);
                                 for (int x = 0; x < arregloBotones.length; x++) {
                                     for (int y = 0; y < arregloBotones[x].length; y++) {
                                         if (arregloBotones[x][y] == getBotonAnterior()) {
@@ -102,24 +118,27 @@ public class AccionBotones implements ActionListener {
                                         }
                                     }
                                 }
-                                
                                 setMascotaAnterior(null);
                                 setBotonAnterior(null);
+                                setParejasJugador(getParejasJugador() + 1);
+                                break;
                             } else {
                                 setVictoriaEnemigo(getVictoriaEnemigo() + 1);
                                 JOptionPane.showMessageDialog(null, "Turno Enemigo. Pareja encontrda, continue con el turno");
-                                
                                 arregloBotones[i][j].setEnabled(false);
+                                setContadorClik(getContadorClik() + 1);
                                 for (int x = 0; x < arregloBotones.length; x++) {
                                     for (int y = 0; y < arregloBotones[x].length; y++) {
                                         if (arregloBotones[x][y] == getBotonAnterior()) {
                                             arregloBotones[x][y].setEnabled(false);
+
                                             break;
                                         }
                                     }
                                 }
                                 setMascotaAnterior(null);
                                 setBotonAnterior(null);
+                                setParejasEnemigo(getParejasEnemigo() + 1);
                             }
                             break;
                         } else {
@@ -174,14 +193,54 @@ public class AccionBotones implements ActionListener {
                         setMascotaAnterior(mascota);
                         setBotonAnterior(getArregloBotones()[i][j]);
                     }
-                }
 
+                }
             }
+        }
+        int num = matriz.length;
+        int nume = matriz[0].length;
+        int lim = (num * nume) / 2;
+        if (getContadorClik() == lim) {
+            if (getParejasJugador() > getParejasEnemigo()) {
+                calcularOroGanado();
+            } else {
+                JOptionPane.showMessageDialog(null, "Batalla perdida.");
+            }
+
+        }
+        lblParesEn.setText("Pares Pokemon Salvaje: "+ getParejasEnemigo());
+        lblParesPk.setText("Pares Pokemon Salvaje: "+ getParejasJugador());
+        if(isTurnoJugador() == true){
+            lblTurno.setText("Turno: Mi pokemon");
+        }else{
+            lblTurno.setText("Turno: Pokemon Salvaje");
         }
     }
 
     public boolean turno() {
         return !isTurnoJugador();
+    }
+
+    public void calcularOroGanado() {
+        String nombre = (String) cmbMascotasJugador.getSelectedItem();
+        for (int i = 0; i < getMascotasJugador().length; i++) {
+            if (getMascotasJugador()[i].getNombreMascota().equals(nombre)) {
+                int numero = (int) (Math.random() * 15 + 1);
+                int oroGando = 10 + (20 * getMascotasJugador()[i].getNivel()) + (numero);
+                setMonedaOro(getMonedasOro() + oroGando);
+                setOro(getOro() + oroGando);
+                establecerOroPrincipal();
+                getMascotasJugador()[i].setBatallasGanadas( getMascotasJugador()[i].getBatallasGanadas()+1);
+                if(getMascotasJugador()[i].getBatallasGanadas() == getMascotasJugador()[i].getLimBatallasGanadas()){
+                    getMascotasJugador()[i].setNivel(getMascotasJugador()[i].getNivel()+1);
+                    getMascotasJugador()[i].setBatallasGanadas(0);
+                    getMascotasJugador()[i].calcularLimiteBatallas();
+                }
+                JOptionPane.showMessageDialog(null, String.format("Felicidades Batalla ganada, Oro obtenido: %d", oroGando));
+            }
+
+        }
+
     }
 
 }

@@ -13,7 +13,7 @@ public class Enemigo {
         mascotaSalvaje = new Mascota();
     }
 
-    public void obtenerMascota(Mascota mascotaJugador) {
+    public Mascota obtenerMascota(Mascota mascotaJugador) {
         MascotasExistentes obtenerMascota = new MascotasExistentes();
         int numeroMascota = (int) (Math.random() * 20 + 1);
         mascotaSalvaje = obtenerMascota.obtenerMascota(numeroMascota);
@@ -25,6 +25,7 @@ public class Enemigo {
         } else if (numero > 67) {
             mascotaSalvaje.setNivel(mascotaJugador.getNivel()+2);
         }
-        matriz(mascotaSalvaje);
+        
+        return mascotaSalvaje;
     }
 }

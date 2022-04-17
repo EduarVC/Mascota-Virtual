@@ -1,6 +1,7 @@
 package com.mycompany.mascotas;
 
 import com.mycompany.Controladores.ControladorComboBox;
+import com.mycompany.Controladores.ControladorVidaLvl5;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMascotasMuertas;
 import javax.swing.JOptionPane;
 
@@ -18,6 +19,8 @@ public class Mascota extends Thread {
     private int comidasAcumuladas;
     private int conteoEnfermedadesAcumuladas;
     private int EnfermedadesAcumuladas;
+    private int batallasGanadas;
+    private int limBatallasGanadas;
     private boolean nace;
     private boolean crece_vivir;
     private boolean alimentada;
@@ -74,11 +77,40 @@ public class Mascota extends Thread {
             }else{
                 setMuere(true);
             }
-             
+            
+            if(getNivel() == 5){
+               ControladorVidaLvl5 controlVida = new ControladorVidaLvl5(this);
+               controlVida.start();
+            } 
         }
+        if (getConteoComidasAcumuladas() < getComidasAcumuladas() && getConteoEnfermedadesAcumuladas() < getEnfermedadesAcumuladas()) {
+            JOptionPane.showMessageDialog(null, String.format("el pokemon %s a muerto por ser lvl 5", getNombreMascota()));
+        }else{
         JOptionPane.showMessageDialog(null, String.format("el pokemon %s a muerto", getNombreMascota()));
+        }
         ControladorComboBox control = new ControladorComboBox();
         control.cambioMascotasJugador(this, getMascotasMuertas());
+    }
+    
+
+    public void calcularLimiteBatallas(){
+        int numero = (int)(Math.random()*15+5);
+        setLimBatallasGanadas(numero*getNivel());
+    }
+    public int getBatallasGanadas() {
+        return batallasGanadas;
+    }
+
+    public void setBatallasGanadas(int batallasGanadas) {
+        this.batallasGanadas = batallasGanadas;
+    }
+
+    public int getLimBatallasGanadas() {
+        return limBatallasGanadas;
+    }
+
+    public void setLimBatallasGanadas(int limBatallasGanadas) {
+        this.limBatallasGanadas = limBatallasGanadas;
     }
 
     public int getNumeroMascota() {

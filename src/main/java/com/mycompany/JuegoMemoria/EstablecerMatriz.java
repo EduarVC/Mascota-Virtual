@@ -118,8 +118,6 @@ public class EstablecerMatriz {
                 verificar = true;
                 while (verificar == true) {
                     int posAleatoria = (int) (Math.random() * (getColumnas()*getFilas()));
-//                    System.out.println(posAleatoria);
-//                    System.out.println("");
                     if (cartas[posAleatoria] != 0) {
                         matrizN[i][j] = cartas[posAleatoria];
                         cartas[posAleatoria] = 0;

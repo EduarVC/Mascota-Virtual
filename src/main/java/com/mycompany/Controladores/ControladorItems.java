@@ -36,7 +36,7 @@ public class ControladorItems {
                 + "<p>Paseo pendiente: "+ mascotaSeleccionada.getConteoPaseoAcumulado() + "/4"
                 + "<p>Limpieza pendiente: "+ mascotaSeleccionada.getConteoLimpiezaAcumulada() + "/3"
                 + "<p>Enfermedades: "+ mascotaSeleccionada.getConteoEnfermedadesAcumuladas() + "/6"
-                
+                + "<p>Victorias: "+ mascotaSeleccionada.getBatallasGanadas() + "/" + mascotaSeleccionada.getLimBatallasGanadas()
                 +"<html>");
     }
 }

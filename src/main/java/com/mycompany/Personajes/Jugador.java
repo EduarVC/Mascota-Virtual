@@ -44,6 +44,7 @@ public class Jugador {
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotasAdquiridas[0].getNombreMascota());
         setMascotasAdquiridas(mascotasAdquiridas);
         getMascotasAdquiridas()[0].start();
+        getMascotasAdquiridas()[0].calcularLimiteBatallas();
         for (int i = 0; i < mascotasAdquiridas.length; i++) {
             System.out.println(mascotasAdquiridas[i]);
         }
@@ -67,6 +68,7 @@ public class Jugador {
         if (!"".equals(apodo)) {
             mascotas[mascotas.length - 1].setApodoMascota(apodo);
         }
+        mascotas[mascotas.length-1].calcularLimiteBatallas();
         mascotas[mascotas.length - 1].start();
         for (int i = 0; i < getMascotasAdquiridas().length; i++) {
             System.out.println(getMascotasAdquiridas()[i]);
@@ -244,6 +246,7 @@ public class Jugador {
             System.out.println(getMascotasAdquiridas()[i]);
 
         }
+        mascotas[mascotas.length-1].calcularLimiteBatallas();
         DefaultComboBoxModel model = (DefaultComboBoxModel) cmbMascotasJugador.getModel();
         model.addElement(getMascotasAdquiridas()[getMascotasAdquiridas().length - 1].getNombreMascota());
         monedasOro = restarMonedasOro(precioRevivir);
