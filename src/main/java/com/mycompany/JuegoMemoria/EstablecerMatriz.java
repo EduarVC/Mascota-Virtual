@@ -136,6 +136,7 @@ public class EstablecerMatriz {
             }
             System.out.println("");
         }
+        
         setMatrizz(matrizN);
         JFrameMemoria inciar = new JFrameMemoria(getColumnas(), getFilas());
         inciar.setVisible(true);

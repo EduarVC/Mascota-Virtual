@@ -26,7 +26,7 @@ public class Tienda {
         mascota = new MascotasExistentes();
         alimento = new AlimentosExistentes();
         medicina = new MedicinasExistentes();
-        cantidadPokemons = 6;
+        cantidadPokemons = 20;
         precioPokemons = 50;
         cantidadAlimentos = 3;
         cantidadMedicinas = 3;
