@@ -112,6 +112,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnAcptarTienda = new javax.swing.JButton();
         cmbRevivir = new javax.swing.JComboBox<>();
         btnRevivir = new javax.swing.JButton();
+        lblMisPokemons = new javax.swing.JLabel();
+        lblPokMuertos = new javax.swing.JLabel();
+        btnReportes = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -207,12 +210,22 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btAcercaDe.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         btAcercaDe.setForeground(new java.awt.Color(204, 204, 204));
         btAcercaDe.setText("Acerca de");
+        btAcercaDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btAcercaDeMousePressed(evt);
+            }
+        });
         jpPanelPrincipal.add(btAcercaDe, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 450, 100, 30));
 
         btAyuda.setBackground(new java.awt.Color(23, 26, 32));
         btAyuda.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         btAyuda.setForeground(new java.awt.Color(204, 204, 204));
         btAyuda.setText("Ayuda");
+        btAyuda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btAyudaMousePressed(evt);
+            }
+        });
         jpPanelPrincipal.add(btAyuda, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 450, 90, 30));
 
         lblOro.setBackground(new java.awt.Color(0, 0, 0));
@@ -338,6 +351,23 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
         jpPanelPrincipal.add(btnRevivir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 90, 30));
+
+        lblMisPokemons.setBackground(new java.awt.Color(153, 153, 153));
+        lblMisPokemons.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        lblMisPokemons.setForeground(new java.awt.Color(0, 0, 0));
+        lblMisPokemons.setText("Mi Pokemon");
+        jpPanelPrincipal.add(lblMisPokemons, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 120, 20));
+
+        lblPokMuertos.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        lblPokMuertos.setForeground(new java.awt.Color(0, 0, 0));
+        lblPokMuertos.setText("Pokemon Muerto");
+        jpPanelPrincipal.add(lblPokMuertos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, 110, 20));
+
+        btnReportes.setBackground(new java.awt.Color(23, 26, 32));
+        btnReportes.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        btnReportes.setForeground(new java.awt.Color(204, 204, 204));
+        btnReportes.setText("Reportes");
+        jpPanelPrincipal.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, 100, 30));
         jpPanelPrincipal.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 620, 510));
 
         getContentPane().add(jpPanelPrincipal, new java.awt.GridBagConstraints());
@@ -462,41 +492,15 @@ public class JFramePrincipal extends javax.swing.JFrame {
         paseo.setVisible(true);
     }//GEN-LAST:event_btnPaseoMousePressed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFramePrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btAcercaDeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAcercaDeMousePressed
+        JOptionPane.showMessageDialog(null, "Desarrollador: Eduardo David Vásquez Cabrera \nEstudiante de Ingeniería en Ciencias y Sistemas \nCurso: Introducción a la Programación y Computación 1 \nCarné: 201632292", "Acerca de.",ICONIFIED);
+    }//GEN-LAST:event_btAcercaDeMousePressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new JFramePrincipal().setVisible(true);
-            }
-        });
-    }
+    private void btAyudaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAyudaMousePressed
+        Ayuda ayuda = new Ayuda();
+        ayuda.setVisible(true);
+    }//GEN-LAST:event_btAyudaMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JpFondoInfo;
@@ -505,6 +509,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAcptarTienda;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnPaseo;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnRevivir;
     private javax.swing.JComboBox<String> cbTienda;
     public static javax.swing.JComboBox<String> cmbMascotasJugador;
@@ -520,8 +525,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblFondo2;
     public static javax.swing.JLabel lblImagen;
     public static javax.swing.JLabel lblInformacionMascota;
+    private javax.swing.JLabel lblMisPokemons;
     public static javax.swing.JLabel lblMonedasOro;
     private javax.swing.JLabel lblOro;
+    private javax.swing.JLabel lblPokMuertos;
     private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }
