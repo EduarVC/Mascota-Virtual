@@ -1,6 +1,9 @@
 package com.mycompany.Controladores;
 
+import static com.mycompany.Controladores.ControladorPaseo.isSalir;
 import com.mycompany.JFrameMascotaVirtual.EstablecerImagenes;
+import static com.mycompany.JFrameMascotaVirtual.Paseo.btnContinuar;
+import static com.mycompany.JFrameMascotaVirtual.Paseo.btnTerminar;
 import static com.mycompany.JFrameMascotaVirtual.Paseo.lblImg1;
 import static com.mycompany.JFrameMascotaVirtual.Paseo.lblImg2;
 import static com.mycompany.JFrameMascotaVirtual.Paseo.lblImg3;
@@ -53,9 +56,11 @@ public class ControladorPaseo extends Thread {
     @Override
     public void run() {
         EstablecerImagenes establecer = new EstablecerImagenes();
-        String path = "src/main/java/com/mycompany/Imagenes/AshP.jpg";
+        String path = "src/main/java/com/mycompany/Imagenes/AshK.jpg";
         int tiempo = 2000;
-        while (salir != true) {
+        while (isSalir() != true) {
+            btnContinuar.setEnabled(false);
+            btnTerminar.setEnabled(false);
             try {
                 sleep(tiempo);
             } catch (InterruptedException e) {
@@ -78,15 +83,22 @@ public class ControladorPaseo extends Thread {
             }
             lblImg2.setIcon(null);
             establecer.establecerImagen(lblImg3, path);
+
             batalla = decidirBatalla();
             if (batalla == true) {
                 Enemigo enemigo = new Enemigo();
                 mascotaSalvaje = enemigo.obtenerMascota(mascota);
-                establecer.establecerImagen(lblImgEnemigo, mascota.getPathImagen());
+                establecer.establecerImagen(lblImgEnemigo, mascotaSalvaje.getPathImagen());
                 JOptionPane.showMessageDialog(null, "Has encontrado a un pokemon Salvaje");
                 matriz(mascotaSalvaje);
                 this.stop();
             }
+            btnTerminar.setEnabled(true);
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+            }
+            btnTerminar.setEnabled(false);
         }
     }
 

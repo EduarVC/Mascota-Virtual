@@ -75,7 +75,7 @@ public class EstablecerMatriz {
         int[][] matrizN = new int[getFilas()][getColumnas()];
 
         while (contador < numeroParejas) {
-            int numero = (int) (Math.random() * 20 + 1); // cambair dato
+            int numero = (int) (Math.random() * 151 + 1);
             for (int i = 0; i < parejas.length; i++) {
                 if (numero == parejas[i]) {
                     existe = true;

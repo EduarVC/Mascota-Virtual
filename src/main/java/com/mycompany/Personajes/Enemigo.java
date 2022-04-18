@@ -1,7 +1,5 @@
 package com.mycompany.Personajes;
 
-import com.mycompany.JuegoMemoria.EstablecerMatriz;
-import static com.mycompany.JuegoMemoria.EstablecerMatriz.matriz;
 import com.mycompany.mascotas.Mascota;
 import com.mycompany.mascotavirtual.MascotasExistentes;
 
@@ -15,7 +13,7 @@ public class Enemigo {
 
     public Mascota obtenerMascota(Mascota mascotaJugador) {
         MascotasExistentes obtenerMascota = new MascotasExistentes();
-        int numeroMascota = (int) (Math.random() * 20 + 1);
+        int numeroMascota = (int) (Math.random() * 151 + 1);
         mascotaSalvaje = obtenerMascota.obtenerMascota(numeroMascota);
         int numero = (int) (Math.random() * 100 + 1);
         if (numero > 0 && numero <= 34) {

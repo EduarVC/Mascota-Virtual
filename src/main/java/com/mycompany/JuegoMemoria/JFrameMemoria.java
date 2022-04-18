@@ -2,6 +2,8 @@ package com.mycompany.JuegoMemoria;
 
 import com.mycompany.Controladores.ControladorPaseo;
 import static com.mycompany.Controladores.ControladorPaseo.setSalir;
+import static com.mycompany.JFrameMascotaVirtual.Paseo.btnContinuar;
+import static com.mycompany.JFrameMascotaVirtual.Paseo.btnTerminar;
 import static com.mycompany.JuegoMemoria.AccionBotones.getArregloBotones;
 import static com.mycompany.JuegoMemoria.AccionBotones.setArregloBotones;
 import com.mycompany.mascotas.Mascota;
@@ -14,7 +16,8 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 public class JFrameMemoria extends javax.swing.JFrame {
-    static JButton [][] matriz;
+
+    static JButton[][] matriz;
     private int columnas;
     private int filas;
     private static JButton botonAnterior;
@@ -24,7 +27,7 @@ public class JFrameMemoria extends javax.swing.JFrame {
     private static int parejasEnemigo;
     private static int contadorClik;
     private static Mascota mascota;
-    
+
     public JFrameMemoria(int columnas, int filas) {
         initComponents();
         this.columnas = columnas;
@@ -34,8 +37,8 @@ public class JFrameMemoria extends javax.swing.JFrame {
         setParejasEnemigo(0);
         setParejasJugador(0);
         setContadorClik(0);
-        lblParesEn.setText("Pares Pokemon Salvaje: "+ getParejasEnemigo());
-        lblParesPk.setText("Pares Pokemon Salvaje: "+ getParejasJugador());
+        lblParesEn.setText("Pares Pokemon Salvaje: " + getParejasEnemigo());
+        lblParesPk.setText("Pares Pokemon Salvaje: " + getParejasJugador());
         lblTurno.setText("Turno: Mi pokemon");
         botonAnterior = null;
         mascotaAnterior = null;
@@ -98,6 +101,7 @@ public class JFrameMemoria extends javax.swing.JFrame {
     public static void setBotonAnterior(JButton botonAnterior) {
         JFrameMemoria.botonAnterior = botonAnterior;
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -200,10 +204,10 @@ public class JFrameMemoria extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblParesPk, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblParesPk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblParesEn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRegresar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
@@ -233,20 +237,22 @@ public class JFrameMemoria extends javax.swing.JFrame {
     private void btnRegresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMousePressed
         ControladorPaseo controlador = new ControladorPaseo(getMascota());
         setSalir(true);
+        btnTerminar.setEnabled(true);
+        btnContinuar.setEnabled(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMousePressed
 
-    public void setMatriz(){
-        Font fuent = new Font("Arial",Font.BOLD,16);
+    public void setMatriz() {
+        Font fuent = new Font("Arial", Font.BOLD, 16);
         matriz = new JButton[filas][columnas];
         int x = 20;
         int y = 20;
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
-                matriz [i][j] = new JButton();
-                matriz [i][j].setBackground(Color.DARK_GRAY);
-                matriz [i][j].setBounds(y, x, 80, 80);
-                ImageIcon im = new ImageIcon( "src/main/java/com/mycompany/Imagenes/pokebll.jpg");
+                matriz[i][j] = new JButton();
+                matriz[i][j].setBackground(Color.DARK_GRAY);
+                matriz[i][j].setBounds(y, x, 80, 80);
+                ImageIcon im = new ImageIcon("src/main/java/com/mycompany/Imagenes/pokebll.jpg");
                 Icon imag = new ImageIcon(im.getImage().getScaledInstance(matriz[i][j].getWidth(), matriz[i][j].getHeight(), Image.SCALE_DEFAULT));
                 AccionBotones accion = new AccionBotones();
                 matriz[i][j].setIcon(imag);
@@ -255,12 +261,12 @@ public class JFrameMemoria extends javax.swing.JFrame {
                 } catch (ClassCastException e) {
                     JOptionPane.showMessageDialog(null, "Algo salio mal");
                 }
-                
+
                 jPMemoria.add(matriz[i][j]);
-                y +=80;
+                y += 80;
             }
-            x+=80;
-            y=20;
+            x += 80;
+            y = 20;
         }
         setArregloBotones(matriz);
     }

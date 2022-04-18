@@ -1,0 +1,22 @@
+package com.mycompany.mascotas;
+
+public class Gloom extends Mascota{
+     public Gloom(){
+        setNombreMascota("Gloom");
+        setNivel(1);
+        setNace(false);
+        setCrece_vivir(false);
+        setAlimentada(false);
+        setLimpiada(false);
+        setPaseada(false);
+        setCurada(false);
+        setEnferma(false);
+        setMuere(false);
+        setRevive(false);
+        setPathImagen("src/main/java/com/mycompany/Imagenes/044Gloom.png");
+        setComidasAcumuladas(5);
+        setEnfermedadesAcumuladas(6);
+        setNumeroMascota(44);
+        setApodoMascota("No disponible");
+    }
+}

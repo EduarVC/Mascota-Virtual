@@ -424,10 +424,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarMousePressed
 
     private void btnRevivirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevivirMousePressed
-        for (int i = 0; i < getMascotasMuertas().length; i++) {
-            System.out.println(getMascotasMuertas());
-        }
-        setmascotasMuertas(getMascotasMuertas());
+
         try {
 
             for (int i = 0; i < getMascotasMuertas().length; i++) {

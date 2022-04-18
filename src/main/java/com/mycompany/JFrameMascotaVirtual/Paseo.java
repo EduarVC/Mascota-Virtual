@@ -5,6 +5,7 @@
 package com.mycompany.JFrameMascotaVirtual;
 
 import com.mycompany.Controladores.ControladorPaseo;
+import static com.mycompany.Controladores.ControladorPaseo.setSalir;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMascotasJugador;
 import com.mycompany.mascotas.Mascota;
 import javax.naming.ldap.Rdn;
@@ -41,11 +42,12 @@ public class Paseo extends javax.swing.JFrame {
         lblImgEnemigo = new javax.swing.JLabel();
         btnTerminar = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
+        lblTitulo = new javax.swing.JLabel();
         lblImgFondo = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblImg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 30, 50));
         getContentPane().add(lblImg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 50, 70));
@@ -61,6 +63,11 @@ public class Paseo extends javax.swing.JFrame {
                 btnTerminarMousePressed(evt);
             }
         });
+        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 140, 40));
 
         btnContinuar.setBackground(new java.awt.Color(23, 26, 32));
@@ -72,7 +79,19 @@ public class Paseo extends javax.swing.JFrame {
                 btnContinuarMousePressed(evt);
             }
         });
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 100, 30));
+
+        lblTitulo.setBackground(new java.awt.Color(0, 0, 0));
+        lblTitulo.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(51, 51, 51));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("DE PASEO");
+        getContentPane().add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 210, 30));
 
         lblImgFondo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(lblImgFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 440));
@@ -82,7 +101,15 @@ public class Paseo extends javax.swing.JFrame {
 
     private void btnTerminarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTerminarMousePressed
         
-        for (int i = 0; i < getMascotasJugador().length; i++) {
+       
+    }//GEN-LAST:event_btnTerminarMousePressed
+
+    private void btnContinuarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMousePressed
+        
+    }//GEN-LAST:event_btnContinuarMousePressed
+
+    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
+         for (int i = 0; i < getMascotasJugador().length; i++) {
             if (getMascotasJugador()[i].getNombreMascota().equals(this.mascota.getNombreMascota())) {
                 if (getMascotasJugador()[i].getConteoPaseoAcumulado() > 0) {
                     getMascotasJugador()[i].setConteoPaseoAcumulado(getMascotasJugador()[i].getConteoPaseoAcumulado() - 1);
@@ -92,22 +119,25 @@ public class Paseo extends javax.swing.JFrame {
         }
         controlador = new ControladorPaseo(this.mascota);
         controlador.stop();
+        setSalir(true);
         this.dispose();
-    }//GEN-LAST:event_btnTerminarMousePressed
+    }//GEN-LAST:event_btnTerminarActionPerformed
 
-    private void btnContinuarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContinuarMousePressed
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         controlador = new ControladorPaseo(this.mascota);
+        setSalir(false);
         controlador.start();
-    }//GEN-LAST:event_btnContinuarMousePressed
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnContinuar;
-    private javax.swing.JButton btnTerminar;
+    public static javax.swing.JButton btnContinuar;
+    public static javax.swing.JButton btnTerminar;
     private javax.swing.JButton jButton1;
     public static javax.swing.JLabel lblImg1;
     public static javax.swing.JLabel lblImg2;
     public static javax.swing.JLabel lblImg3;
     public static javax.swing.JLabel lblImgEnemigo;
     private javax.swing.JLabel lblImgFondo;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }
