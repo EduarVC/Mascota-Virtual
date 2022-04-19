@@ -2,7 +2,10 @@ package com.mycompany.mascotas;
 
 import com.mycompany.Controladores.ControladorComboBox;
 import com.mycompany.Controladores.ControladorVidaLvl5;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerFecha;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerHora;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMascotasMuertas;
+import com.mycompany.Reportes.ControlReportes;
 import javax.swing.JOptionPane;
 
 public class Mascota extends Thread {
@@ -50,6 +53,7 @@ public class Mascota extends Thread {
     public void run() {
         int tiempoAlimento = 30000;
         int tiempoPaseo = 30000;
+        ControlReportes control1 = new ControlReportes();
         while (isMuere() == false) { //Se mantiene el proceso si el pokemon sigue vivo
             System.out.println("hilo iniciado " + getNombreMascota());
             if (getConteoComidasAcumuladas() < getComidasAcumuladas() && getConteoEnfermedadesAcumuladas() < getEnfermedadesAcumuladas()) {
@@ -57,10 +61,11 @@ public class Mascota extends Thread {
                     Thread.sleep(tiempoAlimento);
                 } catch (InterruptedException e) {
                     JOptionPane.showMessageDialog(null, "Error en el Hilo de almientos");
+                    
                 }
                 JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita ser alimentado", getNombreMascota()));
                 setConteoComidasAcumuladas(getConteoComidasAcumuladas() + 1);
-                
+                control1.agregarRepote(getNombreMascota(), "Peticion alimento", obtenerFecha(), obtenerHora(), getNivel());
                 try {
                     Thread.sleep(tiempoPaseo);
                 } catch (InterruptedException e) {
@@ -68,11 +73,13 @@ public class Mascota extends Thread {
                 }
                 JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita salir de paseo", getNombreMascota()));
                 setConteoPaseoAcumulado(getConteoPaseoAcumulado() + 1);
+                control1.agregarRepote(getNombreMascota(), "Peticion paseo", obtenerFecha(), obtenerHora(), getNivel());
                 if (getConteoPaseoAcumulado() >= 4) {
                     setConteoEnfermedadesAcumuladas(getConteoEnfermedadesAcumuladas() + 1);
                     setEnferma(true);
                     JOptionPane.showMessageDialog(null, String.format("el pokemon %s a contraido una nueva enfermedad", getNombreMascota()));
                     setConteoPaseoAcumulado(0);
+                    control1.agregarRepote(getNombreMascota(), "Se enfermo", obtenerFecha(), obtenerHora(), getNivel());
                 }
             }else{
                 setMuere(true);
@@ -85,8 +92,10 @@ public class Mascota extends Thread {
         }
         if (getConteoComidasAcumuladas() < getComidasAcumuladas() && getConteoEnfermedadesAcumuladas() < getEnfermedadesAcumuladas()) {
             JOptionPane.showMessageDialog(null, String.format("el pokemon %s a muerto por ser lvl 5", getNombreMascota()));
+            control1.agregarRepote(getNombreMascota(), "Murio", obtenerFecha(), obtenerHora(), getNivel());
         }else{
         JOptionPane.showMessageDialog(null, String.format("el pokemon %s a muerto", getNombreMascota()));
+        control1.agregarRepote(getNombreMascota(), "Murio", obtenerFecha(), obtenerHora(), getNivel());
         }
         ControladorComboBox control = new ControladorComboBox();
         control.cambioMascotasJugador(this, getMascotasMuertas());

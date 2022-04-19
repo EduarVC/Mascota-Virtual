@@ -4,13 +4,17 @@
  */
 package com.mycompany.JFrameMascotaVirtual;
 
-import static com.mycompany.Controladores.ControladorComboBox.setmascotasMuertas;
 import com.mycompany.Controladores.ControladorItems;
 import static com.mycompany.Controladores.ControladorOro.precioRevivir;
 import static com.mycompany.Controladores.ControladorOro.setOro;
 import com.mycompany.Controladores.ControladorSeleccionTienda;
-import com.mycompany.Personajes.Enemigo;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerFecha;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerHora;
 import com.mycompany.Personajes.Jugador;
+import com.mycompany.Reportes.ControlReportes;
+import com.mycompany.Reportes.ReportePokemon;
+import com.mycompany.Reportes.Reportes;
+import static com.mycompany.Reportes.Reportes.setReportes;
 import com.mycompany.mascotas.Mascota;
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -31,6 +35,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private static Mascota[] mascotasJugador;
     private static int monedasOro;
     private static Mascota[] mascotasMuertas;
+    private static ReportePokemon [] reportesPok;
 
     public JFramePrincipal() {
         initComponents();
@@ -47,6 +52,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         estblecer.establecerImagen(lblFondo2, "src/main/java/com/mycompany/Imagenes/poke.png");//Establecemos la imagen del panel lateral
         estblecer.establecerImagen(lblOro, "src/main/java/com/mycompany/Imagenes/Oroo.png");//establecemos la imagen del Oro
         InicializarCbo();//llamamos al metodo para establecer datos del comboBox
+    }
+
+    public static ReportePokemon[] getReportesPok() {
+        return reportesPok;
+    }
+
+    public static void setReportesPok(ReportePokemon[] reportesPok) {
+        JFramePrincipal.reportesPok = reportesPok;
     }
 
     public static Mascota[] getMascotasMuertas() {
@@ -367,6 +380,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
         btnReportes.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         btnReportes.setForeground(new java.awt.Color(204, 204, 204));
         btnReportes.setText("Reportes");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
         jpPanelPrincipal.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 450, 100, 30));
         jpPanelPrincipal.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 0, 620, 510));
 
@@ -430,6 +448,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbMascotasJugadorMousePressed
 
     private void btnLimpiarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMousePressed
+        ControlReportes controlR = new ControlReportes();
         if (cmbMascotasJugador.getSelectedItem() != null) {
             int salida = JOptionPane.showConfirmDialog(null, String.format("Esta seguro de limpiar a %s", cmbMascotasJugador.getSelectedItem()));
             if (salida == 0) {
@@ -439,6 +458,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                             if (getMascotasJugador()[i].getConteoLimpiezaAcumulada() > 0) {
                                 getMascotasJugador()[i].setConteoLimpiezaAcumulada(getMascotasJugador()[i].getConteoLimpiezaAcumulada() - 1);
                                 JOptionPane.showMessageDialog(null, "Limpieza exitosa");
+                                controlR.agregarRepote(getMascotasJugador()[i].getNombreMascota(), "Fue limpiada", obtenerFecha(), obtenerHora(), getMascotasJugador()[i].getNivel());
                             } else {
                                 JOptionPane.showMessageDialog(null, "La mascota no necesita limpieza en este momento.");
                             }
@@ -481,12 +501,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void btnPaseoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPaseoMousePressed
       String nombre = (String) cmbMascotasJugador.getSelectedItem();
       Mascota mascotaPaseo = new Mascota();
+      ControlReportes controlR = new ControlReportes();
         for (int i = 0; i < getMascotasJugador().length; i++) {
             if(getMascotasJugador()[i].getNombreMascota().equals(nombre)){
                 mascotaPaseo = getMascotasJugador()[i];
+                controlR.agregarRepote(getMascotasJugador()[i].getNombreMascota(), "Salio de paseo", obtenerFecha(), obtenerHora(), getMascotasJugador()[i].getNivel());
                 break;
             }
         }
+        
+        
         
         Paseo paseo = new Paseo(mascotaPaseo);
         paseo.setVisible(true);
@@ -500,6 +524,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
         Ayuda ayuda = new Ayuda();
         ayuda.setVisible(true);
     }//GEN-LAST:event_btAyudaMousePressed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        for (int i = 0; i < getReportesPok().length; i++) {
+            System.out.println(getReportesPok()[i]); 
+        }
+        
+        setReportes(getReportesPok());
+        Reportes reportes = new Reportes();
+        reportes.setVisible(true);
+    }//GEN-LAST:event_btnReportesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

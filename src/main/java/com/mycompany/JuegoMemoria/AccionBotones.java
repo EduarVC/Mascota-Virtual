@@ -3,6 +3,8 @@ package com.mycompany.JuegoMemoria;
 import static com.mycompany.Controladores.ControladorOro.establecerOroPrincipal;
 import static com.mycompany.Controladores.ControladorOro.getOro;
 import static com.mycompany.Controladores.ControladorOro.setOro;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerFecha;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerHora;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.cmbMascotasJugador;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMascotasJugador;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.getMonedasOro;
@@ -23,6 +25,7 @@ import static com.mycompany.JuegoMemoria.JFrameMemoria.setMascotaAnterior;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.setParejasEnemigo;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.setParejasJugador;
 import static com.mycompany.JuegoMemoria.JFrameMemoria.setTurnoJugador;
+import com.mycompany.Reportes.ControlReportes;
 import com.mycompany.mascotas.Mascota;
 import com.mycompany.mascotavirtual.MascotasExistentes;
 import java.awt.Image;
@@ -231,8 +234,11 @@ public class AccionBotones implements ActionListener {
                 setOro(getOro() + oroGando);
                 establecerOroPrincipal();
                 getMascotasJugador()[i].setBatallasGanadas( getMascotasJugador()[i].getBatallasGanadas()+1);
+                //se sube de nivel
                 if(getMascotasJugador()[i].getBatallasGanadas() == getMascotasJugador()[i].getLimBatallasGanadas()){
+                    ControlReportes control = new ControlReportes();
                     getMascotasJugador()[i].setNivel(getMascotasJugador()[i].getNivel()+1);
+                    control.agregarRepote(getMascotasJugador()[i].getNombreMascota(), "Subio nivel", obtenerFecha(), obtenerHora(), getMascotasJugador()[i].getNivel());
                     getMascotasJugador()[i].setBatallasGanadas(0);
                     getMascotasJugador()[i].calcularLimiteBatallas();
                 }

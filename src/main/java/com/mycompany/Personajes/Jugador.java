@@ -7,9 +7,12 @@ import com.mycompany.Controladores.ControladorComboBox;
 import com.mycompany.Controladores.ControladorOro;
 import static com.mycompany.Controladores.ControladorOro.precioRevivir;
 import static com.mycompany.Controladores.ControladorOro.setOro;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerFecha;
+import static com.mycompany.Controladores.ObtenerFechaHora.obtenerHora;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.cmbMascotasJugador;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.setMascotasJugador;
 import static com.mycompany.JFrameMascotaVirtual.JFramePrincipal.setMonedaOro;
+import com.mycompany.Reportes.ControlReportes;
 import com.mycompany.mascotas.Mascota;
 import com.mycompany.mascotavirtual.MascotasExistentes;
 import javax.swing.DefaultComboBoxModel;
@@ -24,12 +27,14 @@ public class Jugador {
     private Mascota[] mascotas;
     private InterfasAlimento alimentos;
     private InterfasAlimento alimento;
+    private ControlReportes controlR;
 
     public Jugador() {
         alimento = new Cereal();
         alimentos = new Waffle();
         mascotaAdquirida = new MascotasExistentes();
         mascotasAdquiridas = new Mascota[1];
+        controlR = new ControlReportes();
     }
 
     //Se obtiene una mascota Inicial aleatoriamente 
@@ -45,6 +50,7 @@ public class Jugador {
         setMascotasAdquiridas(mascotasAdquiridas);
         getMascotasAdquiridas()[0].start();
         getMascotasAdquiridas()[0].calcularLimiteBatallas();
+        controlR.agregarRepoteInicial(getMascotasAdquiridas()[0].getNombreMascota(), "Nace", obtenerFecha(),obtenerHora(), getMascotasAdquiridas()[0].getNivel());
         for (int i = 0; i < mascotasAdquiridas.length; i++) {
             System.out.println(mascotasAdquiridas[i]);
         }
@@ -74,6 +80,8 @@ public class Jugador {
             System.out.println(getMascotasAdquiridas()[i]);
 
         }
+        
+        controlR.agregarRepote(mascotas[mascotas.length-1].getNombreMascota(), "Nace", obtenerFecha(), obtenerHora(), mascotas[mascotas.length-1].getNivel());
         DefaultComboBoxModel model = (DefaultComboBoxModel) cmbMascotasJugador.getModel();
         model.addElement(getMascotasAdquiridas()[getMascotasAdquiridas().length - 1].getNombreMascota());
         monedasOro = restarMonedasOro(50);
@@ -94,30 +102,37 @@ public class Jugador {
                         if (mascotasJugador[i].getConteoComidasAcumuladas() > 0) {
                             mascotasJugador[i].setAlimentada(true);
                             mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
+                            mascotasJugador[i].setComidasAcumuladas(5);
+//                            controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue alimentada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                         }
 
                         JOptionPane.showMessageDialog(null, "Pokemon Alimentado Exitosamente");
                         mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
                         mascotasJugador[i].setComidasAcumuladas(5);
+                        controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue alimentada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                         break;
                     case 2:
                         if (mascotasJugador[i].getConteoComidasAcumuladas() > 0) {
                             mascotasJugador[i].setAlimentada(true);
                             mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
+//                            controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue alimentada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                         }
 
                         alimento.AumentarComidasPendientes(mascotasJugador[i]);
                         JOptionPane.showMessageDialog(null, "Pokemon Alimentado Exitosamente");
                         mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
+                        controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue alimentada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                         break;
                     case 3:
                         if (mascotasJugador[i].getConteoComidasAcumuladas() > 0) {
                             mascotasJugador[i].setAlimentada(true);
                             mascotasJugador[i].setConteoComidasAcumuladas(mascotasJugador[i].getConteoComidasAcumuladas() - 1);
+//                            controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue alimentada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                         }
                         alimentos.AumentarComidasPendientes(mascotasJugador[i]);
                         JOptionPane.showMessageDialog(null, "Pokemon Alimentado Exitosamente");
                         mascotasJugador[i].setConteoAlimentos(mascotasJugador[i].getConteoAlimentos() + 1);
+                        controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue alimentada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                         break;
                     default:
                         break;
@@ -125,11 +140,13 @@ public class Jugador {
                 if (mascotasJugador[i].getConteoAlimentos() == 2) {
                     JOptionPane.showMessageDialog(null, String.format("el pokemon %s necesita limpieza", mascotasJugador[i].getNombreMascota()));
                     mascotasJugador[i].setConteoLimpiezaAcumulada(mascotasJugador[i].getConteoLimpiezaAcumulada() + 1);
+                    controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Peticion limpieza", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                     if (mascotasJugador[i].getConteoLimpiezaAcumulada() >= 3) {
                         mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() + 1);
                         mascotasJugador[i].setEnferma(true);
                         JOptionPane.showMessageDialog(null, String.format("el pokemon %s a contraido una nueva enfermedad", mascotasJugador[i].getNombreMascota()));
                         mascotasJugador[i].setConteoLimpiezaAcumulada(0);
+                        controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Se enfermo", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                     }
                     mascotasJugador[i].setConteoAlimentos(0);
                 }
@@ -167,26 +184,32 @@ public class Jugador {
                         case 1:
                             mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 1);
                             JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
+                            controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue curada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                             break;
                         case 2:
                             if (mascotasJugador[i].getConteoEnfermedadesAcumuladas() >= 2) {
                                 mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 2);
                                 JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
+                                controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue curada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                             } else {
                                 mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 1);
                                 JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
+                                controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue curada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                             }
                             break;
                         case 3:
                             if (mascotasJugador[i].getConteoEnfermedadesAcumuladas() >= 3) {
                                 mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 3);
                                 JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
+                                controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue curada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                             } else if (mascotasJugador[i].getConteoEnfermedadesAcumuladas() == 2) {
                                 mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 2);
                                 JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
+                                controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue curada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                             } else {
                                 mascotasJugador[i].setConteoEnfermedadesAcumuladas(mascotasJugador[i].getConteoEnfermedadesAcumuladas() - 1);
                                 JOptionPane.showMessageDialog(null, "Medicina aplicada exitosamente");
+                                controlR.agregarRepote(mascotasJugador[i].getNombreMascota(), "Fue curada", obtenerFecha(), obtenerHora(), mascotasJugador[i].getNivel());
                             }
                             break;
                         default:
@@ -241,6 +264,7 @@ public class Jugador {
         setMascotasAdquiridas(mascotas);
 
         JOptionPane.showMessageDialog(null, "Obtuviste el pokemon: " + mascotas[mascotas.length - 1].getNombreMascota());
+        controlR.agregarRepote(mascotas[mascotas.length - 1].getNombreMascota(), "Nace", obtenerFecha(), obtenerHora(), mascotas[mascotas.length - 1].getNivel());
         mascotas[mascotas.length - 1].start();
         for (int i = 0; i < getMascotasAdquiridas().length; i++) {
             System.out.println(getMascotasAdquiridas()[i]);
