@@ -17,4 +17,21 @@
         <maven.compiler.target>15</maven.compiler.target>
         <exec.mainClass>com.mycompany.mascotavirtual.MascotaVirtual</exec.mainClass>
     </properties>
+     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+        
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.mycompany.mascotavirtual.MascotaVirtual</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+        
+            </plugin>
+        </plugins>
+    </build>
 </project>
