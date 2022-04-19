@@ -116,6 +116,7 @@ public class JFrameMemoria extends javax.swing.JFrame {
         lblTurno = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 51));
 

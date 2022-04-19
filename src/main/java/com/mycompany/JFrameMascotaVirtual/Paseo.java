@@ -48,6 +48,7 @@ public class Paseo extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblImg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 30, 50));
         getContentPane().add(lblImg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, 50, 70));
