@@ -109,6 +109,11 @@ public class Reportes extends javax.swing.JFrame {
         });
 
         btnMayor.setText("Mayor a Menor");
+        btnMayor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMayorActionPerformed(evt);
+            }
+        });
 
         btnDefecto.setText("Defecto");
         btnDefecto.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +123,11 @@ public class Reportes extends javax.swing.JFrame {
         });
 
         btnMenor.setText("Menor a Mayor");
+        btnMenor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,6 +240,20 @@ public class Reportes extends javax.swing.JFrame {
 
         control.ObtenerReportesNivel(tblReportes);
     }//GEN-LAST:event_btnNivelActionPerformed
+
+    private void btnMayorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMayorActionPerformed
+        modelo = (DefaultTableModel) tblReportes.getModel();
+        modelo.getDataVector().removeAllElements();
+
+        control.ObtenerReportesMayor(tblReportes);
+    }//GEN-LAST:event_btnMayorActionPerformed
+
+    private void btnMenorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenorActionPerformed
+        modelo = (DefaultTableModel) tblReportes.getModel();
+        modelo.getDataVector().removeAllElements();
+
+        control.ObtenerReportesMenor(tblReportes);
+    }//GEN-LAST:event_btnMenorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

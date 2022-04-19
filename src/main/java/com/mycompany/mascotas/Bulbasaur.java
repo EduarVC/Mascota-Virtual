@@ -4,7 +4,7 @@ public class Bulbasaur extends Mascota{
     
     public Bulbasaur(){
         setNombreMascota("Bulbasaur");
-        setNivel(1);
+        setNivel(2);
         setNace(false);
         setCrece_vivir(false);
         setAlimentada(false);

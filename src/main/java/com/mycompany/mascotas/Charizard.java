@@ -3,7 +3,7 @@ package com.mycompany.mascotas;
 public class Charizard extends Mascota{
       public Charizard(){
         setNombreMascota("Charizard");
-        setNivel(1);
+        setNivel(4);
         setNace(false);
         setCrece_vivir(false);
         setAlimentada(false);

@@ -33,7 +33,7 @@ public class ControlReportes {
         setReportess(nuevoReportein);
         setReportesPok(nuevoReportein);
         for (int i = 0; i < nuevoReportein.length; i++) {
-            System.out.println(nuevoReportein[i]);  
+            System.out.println(nuevoReportein[i]);
         }
     }
 
@@ -44,21 +44,20 @@ public class ControlReportes {
         nuevoRep.setFecha(fecha);
         nuevoRep.setHora(hora);
         nuevoRep.setNivel(nivel);
-        
+
         ReportePokemon[] nuevoReporte = new ReportePokemon[getReportesPok().length + 1];
-        
 
-            for (int i = 0; i < nuevoReporte.length; i++) {
-                if (i == 0) {
-                    nuevoReporte[i] = nuevoRep;
-                } else {
-                    nuevoReporte[i] = getReportesPok()[i-1];
+        for (int i = 0; i < nuevoReporte.length; i++) {
+            if (i == 0) {
+                nuevoReporte[i] = nuevoRep;
+            } else {
+                nuevoReporte[i] = getReportesPok()[i - 1];
 
-                }
             }
-            setReportess(nuevoReporte);
-            setReportesPok(nuevoReporte);
-       
+        }
+        setReportess(nuevoReporte);
+        setReportesPok(nuevoReporte);
+
         System.out.println(nuevoRep);
 
     }
@@ -81,109 +80,168 @@ public class ControlReportes {
             modelo.addRow(datos);
         }
     }
-    public void ObtenerReportesEnfermedad(JTable tabla){
+
+    public void ObtenerReportesEnfermedad(JTable tabla) {
         String[] datos = new String[5];
         for (int i = 0; i < getReportes().length; i++) {
-            if("Se enfermo".equals(getReportes()[i].getAccion()) || "Fue curada".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
-            DefaultTableModel modelo;
-            modelo = (DefaultTableModel) tabla.getModel();
-            modelo.addRow(datos);
+            if ("Se enfermo".equals(getReportes()[i].getAccion()) || "Fue curada".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
             }
         }
     }
-     public void ObtenerReportesAlimento(JTable tabla){
-         String[] datos = new String[5];
+
+    public void ObtenerReportesAlimento(JTable tabla) {
+        String[] datos = new String[5];
         for (int i = 0; i < getReportes().length; i++) {
-            if("Peticion alimento".equals(getReportes()[i].getAccion()) || "Fue alimentada".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
+            if ("Peticion alimento".equals(getReportes()[i].getAccion()) || "Fue alimentada".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    public void ObtenerReportesNace(JTable tabla) {
+        String[] datos = new String[5];
+        for (int i = 0; i < getReportes().length; i++) {
+            if ("Nace".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    public void ObtenerReportesMuere(JTable tabla) {
+        String[] datos = new String[5];
+        for (int i = 0; i < getReportes().length; i++) {
+            if ("Murio".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    public void ObtenerReportesPaseo(JTable tabla) {
+        String[] datos = new String[5];
+        for (int i = 0; i < getReportes().length; i++) {
+            if ("Peticion paseo".equals(getReportes()[i].getAccion()) || "Salio de paseo".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    public void ObtenerReportesLimpieza(JTable tabla) {
+        String[] datos = new String[5];
+        for (int i = 0; i < getReportes().length; i++) {
+            if ("Peticion limpieza".equals(getReportes()[i].getAccion()) || "Fue limpiada".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    public void ObtenerReportesNivel(JTable tabla) {
+        String[] datos = new String[5];
+        for (int i = 0; i < getReportes().length; i++) {
+            if ("Subio nivel".equals(getReportes()[i].getAccion())) {
+                datos[0] = Integer.toString(getReportes()[i].getNivel());
+                datos[1] = getReportes()[i].getNombre();
+                datos[2] = getReportes()[i].getAccion();
+                datos[3] = getReportes()[i].getHora();
+                datos[4] = getReportes()[i].getFecha();
+                DefaultTableModel modelo;
+                modelo = (DefaultTableModel) tabla.getModel();
+                modelo.addRow(datos);
+            }
+        }
+    }
+
+    public void ObtenerReportesMenor(JTable tabla) {
+        String[] datos = new String[5];
+        ReportePokemon[] reportes = new ReportePokemon[getReportes().length];
+        reportes = metodoBurbuja(getReportes());
+        for (int i = 0; i < reportes.length; i++) {
+
+            datos[0] = Integer.toString(reportes[i].getNivel());
+            datos[1] = reportes[i].getNombre();
+            datos[2] = reportes[i].getAccion();
+            datos[3] = reportes[i].getHora();
+            datos[4] = reportes[i].getFecha();
             DefaultTableModel modelo;
             modelo = (DefaultTableModel) tabla.getModel();
             modelo.addRow(datos);
-            }
+
         }
-     }
-     public void ObtenerReportesNace(JTable tabla){
-         String[] datos = new String[5];
-        for (int i = 0; i < getReportes().length; i++) {
-            if("Nace".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
+    }
+
+    public void ObtenerReportesMayor(JTable tabla) {
+        String[] datos = new String[5];
+        ReportePokemon[] reportes = new ReportePokemon[getReportes().length];
+        reportes = metodoBurbuja(getReportes());
+        for (int i = (reportes.length-1); i >=0; i--) {
+
+            datos[0] = Integer.toString(reportes[i].getNivel());
+            datos[1] = reportes[i].getNombre();
+            datos[2] = reportes[i].getAccion();
+            datos[3] = reportes[i].getHora();
+            datos[4] = reportes[i].getFecha();
             DefaultTableModel modelo;
             modelo = (DefaultTableModel) tabla.getModel();
             modelo.addRow(datos);
-            }
+
         }
-     }
-     public void ObtenerReportesMuere(JTable tabla){
-         String[] datos = new String[5];
-        for (int i = 0; i < getReportes().length; i++) {
-            if("Murio".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
-            DefaultTableModel modelo;
-            modelo = (DefaultTableModel) tabla.getModel();
-            modelo.addRow(datos);
+    }
+
+    public ReportePokemon[] metodoBurbuja(ReportePokemon[] arregloReportes) {
+        ReportePokemon auxiliar = new ReportePokemon();
+        for (int i = 0; i < (arregloReportes.length - 1); i++) {
+            for (int j = 0; j < (arregloReportes.length - 1); j++) {
+                if (arregloReportes[j].getNivel() > arregloReportes[j + 1].getNivel()) {
+                    auxiliar = arregloReportes[j];
+                    arregloReportes[j] = arregloReportes[j + 1];
+                    arregloReportes[j + 1] = auxiliar;
+                }
+
             }
+
         }
-     }
-     public void ObtenerReportesPaseo(JTable tabla){
-         String[] datos = new String[5];
-        for (int i = 0; i < getReportes().length; i++) {
-            if("Peticion paseo".equals(getReportes()[i].getAccion()) || "Salio de paseo".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
-            DefaultTableModel modelo;
-            modelo = (DefaultTableModel) tabla.getModel();
-            modelo.addRow(datos);
-            }
-        }
-     }
-     public void ObtenerReportesLimpieza(JTable tabla){
-         String[] datos = new String[5];
-        for (int i = 0; i < getReportes().length; i++) {
-            if("Peticion limpieza".equals(getReportes()[i].getAccion()) || "Fue limpiada".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
-            DefaultTableModel modelo;
-            modelo = (DefaultTableModel) tabla.getModel();
-            modelo.addRow(datos);
-            }
-        }
-     }
-     public void ObtenerReportesNivel(JTable tabla){
-         String[] datos = new String[5];
-        for (int i = 0; i < getReportes().length; i++) {
-            if("Subio nivel".equals(getReportes()[i].getAccion())){
-            datos[0] = Integer.toString(getReportes()[i].getNivel());
-            datos[1] = getReportes()[i].getNombre();
-            datos[2] = getReportes()[i].getAccion();
-            datos[3] = getReportes()[i].getHora();
-            datos[4] = getReportes()[i].getFecha();
-            DefaultTableModel modelo;
-            modelo = (DefaultTableModel) tabla.getModel();
-            modelo.addRow(datos);
-            }
-        }
-     }
+        return arregloReportes;
+    }
 }

@@ -162,6 +162,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mayor a Menor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMayorActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDefecto">
       <Properties>
@@ -175,6 +178,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Menor a Mayor"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenorActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
